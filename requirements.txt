@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+httpx
+pillow
+arabic-reshaper
+python-bidi
+python-multipart
+python-dotenv

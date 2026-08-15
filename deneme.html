@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mushaf — Kuran Sayfası</title>
+<style>
+  /* ── Sayfa bazlı Mushaf fontları — data/fonts/mushaf-font/p{N}.ttf ────────
+     604 sayfanın her biri kendi glyph fontuna sahiptir (orijinal proje
+     mimarisiyle birebir aynı). Tarayıcı yalnızca EKRANDA GÖRÜNEN sayfanın
+     fontunu indirir (@font-face lazy-load), tümünü baştan yüklemez. */
+  @font-face {
+    font-family: 'QCFSurahHeader';
+    src: url('data/fonts/Surah_Header/QCF_SurahHeader_COLOR-Regular.ttf') format('truetype');
+    font-display: swap;
+  }
+
+  :root {
+    --bg:          #EDE8DF;
+    --surface:     #F9F5EE;
+    --border:      #D8CFBF;
+    --green:       #2F6D3A;
+    --green-dark:  #4CAF50;
+    --green-light: #DFF0E3;
+    --honey:       #F4A261;
+    --text-dark:   #0F0B06;
+    --text-mid:    #1F1410;
+    --gold:        #D97706;
+    --red-sel:     #E53935;
+    --blue-sel:    #1E88E5;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+
+  .app-root { height: 100vh; display: flex; flex-direction: column; background: var(--bg); }
+
+  .progress-track { height: 3px; background: var(--border); flex-shrink: 0; }
+  .progress-fill { height: 100%; background: var(--green); border-radius: 1.5px; transition: width .25s ease; }
+
+  .page-viewport {
+    flex: 1; overflow: hidden; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    padding: 6px 4px;
+  }
+
+  .mushaf-card {
+    position: relative;
+    width: min(430px, 94vw);
+    height: min(700px, 88vh); /* JS fitCardToViewport() overrides this with the real available size */
+    background: var(--surface);
+    border: 1.5px solid rgba(47,109,58,0.15);
+    border-radius: 14px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .corner { position: absolute; width: 10px; height: 10px; border-color: rgba(47,109,58,0.25); pointer-events: none; }
+  .corner.tl { top: 6px;    left: 6px;  border-top: 1.5px solid;   border-left: 1.5px solid;  border-top-left-radius: 5px; }
+  .corner.tr { top: 6px;    right: 6px; border-top: 1.5px solid;   border-right: 1.5px solid; border-top-right-radius: 5px; }
+  .corner.bl { bottom: 6px; left: 6px;  border-bottom: 1.5px solid; border-left: 1.5px solid; border-bottom-left-radius: 5px; }
+  .corner.br { bottom: 6px; right: 6px; border-bottom: 1.5px solid; border-right: 1.5px solid; border-bottom-right-radius: 5px; }
+
+  .page-num-badge {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    padding: 2.5px 12px;
+    background: var(--green-light);
+    border: 1px solid rgba(47,109,58,0.30);
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    z-index: 2;
+  }
+  .page-num-badge span { font-size: 9.5px; letter-spacing: 0.4px; font-weight: 700; color: var(--green-dark); }
+
+  .card-content { flex: 1; min-height: 0; padding: 28px 14px 14px; display: flex; flex-direction: column; align-items: center; overflow: hidden; }
+  .card-content-inner { width: 100%; flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 2px; }
+
+  .surah-banner {
+    width: 100%; display: flex; align-items: center; justify-content: center;
+    height: 46px; margin: 4px 0 8px; position: relative;
+  }
+  .surah-banner::before, .surah-banner::after { content: ''; flex: 1; height: 1px; background: var(--honey); opacity: .5; }
+  .surah-banner-text {
+    padding: 0 8px;
+    font-family: 'QCFSurahHeader', 'Amiri', serif;
+    font-size: 30px; line-height: 1; color: var(--text-dark); white-space: nowrap;
+  }
+
+  .quran-line {
+    width: 100%; text-align: center; direction: rtl; unicode-bidi: isolate;
+    font-size: 24px; line-height: 2.0; color: var(--text-dark);
+    letter-spacing: 0; padding: 1px 0;
+  }
+  .basmala-line {
+    width: 100%; text-align: center; direction: rtl; unicode-bidi: isolate;
+    font-size: 22px; padding: 8px 0 10px; color: var(--text-dark);
+  }
+  .word { cursor: pointer; transition: background-color .15s, color .15s; border-radius: 3px; padding: 0 1px; }
+  .word:hover { background: var(--green-light); }
+  .word.sajdah { text-decoration: underline; text-decoration-color: var(--honey); }
+  .word.playing { background: var(--green-light); box-shadow: inset 0 0 0 1px rgba(47,109,58,0.35); }
+
+  .ayet-no {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%; margin: 0 2px;
+    vertical-align: middle; background: var(--honey); border: 1px solid var(--honey);
+    position: relative; cursor: pointer;
+  }
+  .ayet-no::before { content: ''; position: absolute; width: 19px; height: 19px; border-radius: 50%; border: 0.8px solid rgba(255,255,255,0.6); }
+  .ayet-no span { font-size: 11px; font-weight: 900; color: #fff; }
+  .ayet-no.selected-start  { background: var(--green);    border-color: var(--green); }
+  .ayet-no.selected-end    { background: var(--red-sel);  border-color: var(--red-sel); }
+  .ayet-no.selected-single { background: var(--blue-sel); border-color: var(--blue-sel); }
+  .ayet-no.playing { box-shadow: 0 0 0 3px rgba(47,109,58,0.30); }
+
+  .bottom-bar {
+    flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 18px calc(10px + env(safe-area-inset-bottom));
+    background: var(--surface); border-top: 1px solid var(--border); gap: 10px;
+  }
+  .bottom-bar button {
+    background: none; border: none; color: var(--text-mid);
+    font-size: 20px; cursor: pointer; padding: 8px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; transition: background .15s;
+  }
+  .bottom-bar button:hover { background: var(--green-light); }
+  .bottom-bar .page-info { font-size: 12px; color: var(--text-mid); text-align: center; flex: 1; }
+  .bottom-bar .page-info .surah-name { font-weight: 700; color: var(--text-dark); display: block; font-size: 13px; }
+  .play-btn { background: var(--green) !important; color: #fff !important; width: 44px; height: 44px; }
+  .play-btn:hover { background: #275a30 !important; }
+
+  .page-jump { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-mid); }
+  .page-jump input {
+    width: 44px; text-align: center; border: 1px solid var(--border); border-radius: 6px;
+    padding: 4px 2px; font-size: 12px; background: var(--surface); color: var(--text-dark);
+  }
+
+  .status-banner {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 20px; font-size: 13px; color: var(--text-mid); text-align: center;
+    z-index: 10; max-width: 320px; line-height: 1.6;
+  }
+  .status-banner.error { color: #b91c1c; border-color: #f87171; background: #fef2f2; }
+  .status-banner code { background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 4px; font-size: 11px; }
+
+  /* Sayfaya özel Mushaf fontu yüklenene kadar gösterilen ara durum.
+     Mushaf.tsx'teki `fontsLoaded && isReadyForHeavyRender` kapısıyla
+     aynı mantık: font hazır olmadan METİN ASLA çizilmez, çünkü QPC
+     glyph-kod verisi yalnızca kendi sayfasının fontuyla anlamlıdır. */
+  .page-loading {
+    width: 100%; flex: 1; display: flex; align-items: center; justify-content: center;
+    color: var(--text-mid); font-size: 12px; opacity: 0.7;
+  }
+  .page-content-fade { animation: pageFadeIn .18s ease; }
+  @keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  /* ── Üst Navbar (Navbar.tsx — MUSHAF NAVBAR bölümünün web karşılığı) ── */
+  .topbar {
+    flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; padding: 8px 14px calc(6px + env(safe-area-inset-top)) 14px;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+  }
+  .topbar-left { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; }
+  .topbar-titles { min-width: 0; }
+  .topbar-titles .t-main { font-size: 14px; font-weight: 700; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topbar-titles .t-sub  { font-size: 10.5px; color: var(--text-mid); margin-top: 1px; white-space: nowrap; }
+
+  .icon-pill {
+    width: 30px; height: 30px; border-radius: 999px; border: 1.5px solid rgba(47,109,58,0.20);
+    background: rgba(47,109,58,0.10); display: flex; align-items: center; justify-content: center;
+    color: var(--green); cursor: pointer; flex-shrink: 0; transition: background .15s;
+  }
+  .icon-pill:hover { background: rgba(47,109,58,0.18); }
+
+  .play-toggle {
+    display: inline-flex; align-items: center; gap: 5px; padding: 6px 13px; border-radius: 999px;
+    background: var(--green); color: #fff; border: none; cursor: pointer; font-size: 11px; font-weight: 700;
+    flex-shrink: 0; transition: background .15s;
+  }
+  .play-toggle.playing { background: #ef4444; }
+  .play-toggle svg { width: 13px; height: 13px; }
+
+  .topbar-right { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 8px; min-width: 0; }
+  .list-pill {
+    display: inline-flex; align-items: center; gap: 5px; padding: 6px 10px; border-radius: 999px;
+    background: rgba(47,109,58,0.13); border: 1.5px solid rgba(47,109,58,0.28); color: var(--green);
+    font-size: 11px; font-weight: 700; cursor: pointer; white-space: nowrap; flex-shrink: 1; overflow: hidden;
+  }
+
+  /* ── Hamburger çekmecesi (HamburgerMenuPanel'in web karşılığı) ── */
+  .drawer-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 40;
+    opacity: 0; pointer-events: none; transition: opacity .2s ease;
+  }
+  .drawer-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .drawer-panel {
+    position: fixed; top: 0; right: 0; bottom: 0; width: min(340px, 85vw);
+    background: #F9FAFB; z-index: 41; display: flex; flex-direction: column;
+    border-top-left-radius: 24px; border-bottom-left-radius: 24px;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.3);
+    transform: translateX(110%); transition: transform .22s ease;
+  }
+  .drawer-panel.open { transform: translateX(0); }
+
+  .drawer-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 22px; background: rgba(47,109,58,0.09);
+    border-top-left-radius: 24px;
+  }
+  .drawer-header .dh-title { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: var(--text-dark); }
+  .drawer-header .dh-icon { width: 32px; height: 32px; border-radius: 10px; background: rgba(47,109,58,0.18); display: flex; align-items: center; justify-content: center; color: var(--green); }
+  .drawer-close { width: 32px; height: 32px; border-radius: 999px; border: none; background: rgba(0,0,0,0.05); cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-mid); }
+
+  .drawer-body { flex: 1; overflow-y: auto; padding: 22px 18px 32px; display: flex; flex-direction: column; gap: 24px; }
+
+  .d-section-label {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 10px; padding-left: 2px;
+    font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--green);
+  }
+  .d-section-label .dsl-icon { width: 24px; height: 24px; border-radius: 8px; background: rgba(47,109,58,0.12); display: flex; align-items: center; justify-content: center; color: var(--green); }
+
+  .d-card { padding: 15px; background: var(--surface); border-radius: 18px; border: 1px solid var(--border); }
+
+  .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    padding: 8px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 700;
+    background: var(--surface); color: var(--text-mid); border: 1.5px solid var(--border); cursor: pointer;
+  }
+  .chip.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+  .reciter-row {
+    display: flex; align-items: center; justify-content: space-between; padding: 14px; cursor: pointer;
+  }
+  .reciter-row .rr-name { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+  .reciter-row .rr-label { font-size: 11px; color: var(--text-mid); margin-bottom: 2px; }
+  .reciter-list { padding: 0 12px 12px; display: none; flex-direction: column; gap: 4px; border-top: 1px solid var(--border); margin-top: 2px; padding-top: 8px; }
+  .reciter-list.open { display: flex; }
+  .reciter-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 10px; border-radius: 10px; cursor: pointer; font-size: 13.5px; color: var(--text-dark); }
+  .reciter-item.active { background: rgba(47,109,58,0.13); color: var(--green); font-weight: 700; }
+
+  .bg-swatch-row { display: flex; flex-wrap: wrap; gap: 16px; }
+  .bg-swatch { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; background: none; border: none; }
+  .bg-swatch .sw-outer {
+    width: 52px; height: 52px; border-radius: 999px; display: flex; align-items: center; justify-content: center;
+    border: 3px solid transparent; padding: 3px;
+  }
+  .bg-swatch.active .sw-outer { border-color: var(--green); }
+  .bg-swatch .sw-inner { width: 100%; height: 100%; border-radius: 999px; border: 2px solid rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; }
+  .bg-swatch .sw-label { font-size: 11px; color: var(--text-mid); font-weight: 600; }
+  .bg-swatch.active .sw-label { color: var(--green); font-weight: 700; }
+
+  .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 14px; border-radius: 18px; border: 1.5px solid var(--border); background: var(--surface); cursor: pointer; }
+  .toggle-row.active { border-color: rgba(47,109,58,0.4); }
+  .toggle-row .tr-left { display: flex; align-items: center; gap: 12px; flex: 1; }
+  .toggle-row .tr-icon { width: 38px; height: 38px; border-radius: 12px; background: rgba(47,109,58,0.08); display: flex; align-items: center; justify-content: center; color: var(--green); flex-shrink: 0; }
+  .toggle-row .tr-title { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+  .toggle-row .tr-desc  { font-size: 11.5px; color: var(--text-mid); margin-top: 2px; }
+  .switch { width: 44px; height: 25px; border-radius: 13px; background: #D1D5DB; padding: 2px; flex-shrink: 0; transition: background .15s; }
+  .switch.on { background: var(--green); }
+  .switch .knob { width: 21px; height: 21px; border-radius: 999px; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.25); transition: transform .15s; }
+  .switch.on .knob { transform: translateX(19px); }
+  .hint-box { display: flex; gap: 8px; background: rgba(47,109,58,0.08); border: 1px solid rgba(47,109,58,0.22); border-radius: 12px; padding: 11px; margin-top: 10px; font-size: 12px; color: var(--text-mid); line-height: 1.5; }
+
+  /* ── Sure/Cüz/Sayfa Seçme Çekmecesi — NavModal'in web karşılığı ── */
+  .nav-drawer-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 50;
+    opacity: 0; pointer-events: none; transition: opacity .2s ease;
+  }
+  .nav-drawer-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .nav-drawer-panel {
+    position: fixed; top: 0; right: 0; bottom: 0; width: min(380px, 85vw);
+    background: var(--bg); z-index: 51; display: flex; flex-direction: column;
+    border-top-left-radius: 24px; border-bottom-left-radius: 24px;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+    transform: translateX(110%); transition: transform .3s cubic-bezier(.33,1,.68,1);
+    padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);
+  }
+  .nav-drawer-panel.open { transform: translateX(0); }
+
+  .nav-drawer-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px 14px;
+  }
+  .nav-drawer-header .ndh-title { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 700; color: var(--text-dark); }
+  .nav-drawer-header .ndh-icon { width: 36px; height: 36px; border-radius: 12px; background: var(--green-light); border: 1.5px solid var(--green); display: flex; align-items: center; justify-content: center; color: var(--green); }
+  .nav-drawer-close { padding: 4px; background: var(--surface); border-radius: 12px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-mid); }
+
+  .nav-tabs { display: flex; gap: 8px; margin: 0 20px 12px; }
+  .nav-tab {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 10px 4px; border-radius: 14px; border: 1.5px solid var(--border);
+    background: var(--surface); cursor: pointer; gap: 3px; color: var(--text-mid);
+  }
+  .nav-tab svg { width: 17px; height: 17px; }
+  .nav-tab span { font-size: 11px; font-weight: 700; }
+  .nav-tab.active.tab-sure  { background: rgba(47,109,58,0.10);  border-color: var(--green); color: var(--green); }
+  .nav-tab.active.tab-cuz   { background: rgba(244,162,97,0.14); border-color: var(--honey); color: #b5651d; }
+  .nav-tab.active.tab-sayfa { background: rgba(30,136,229,0.10); border-color: var(--blue-sel); color: var(--blue-sel); }
+
+  .nav-search-box {
+    display: flex; align-items: center; gap: 8px;
+    margin: 0 20px 12px; padding: 0 14px; height: 46px;
+    border-radius: 14px; border: 1.5px solid var(--border); background: var(--surface);
+  }
+  .nav-search-box.filled.tab-sure  { border-color: var(--green); }
+  .nav-search-box.filled.tab-cuz   { border-color: var(--honey); }
+  .nav-search-box.filled.tab-sayfa { border-color: var(--blue-sel); }
+  .nav-search-box svg { width: 17px; height: 17px; flex-shrink: 0; color: var(--text-mid); }
+  .nav-search-box input {
+    flex: 1; border: none; outline: none; background: transparent;
+    font-size: 15px; color: var(--text-dark); min-width: 0;
+  }
+  .nav-search-clear { cursor: pointer; display: flex; align-items: center; color: var(--text-light, #9a9184); flex-shrink: 0; }
+
+  .nav-list { flex: 1; overflow-y: auto; padding-bottom: 20px; }
+  .nav-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 20px; border-bottom: 1px solid var(--border); cursor: pointer;
+  }
+  .nav-item:hover { background: rgba(0,0,0,0.02); }
+  .nav-item-icon {
+    width: 40px; height: 40px; border-radius: 12px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; border-width: 1.5px; border-style: solid;
+  }
+  .nav-item-body { flex: 1; min-width: 0; }
+  .nav-item-ana { font-size: 15px; font-weight: 700; direction: rtl; unicode-bidi: isolate; color: var(--text-dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .nav-item-alt { font-size: 11px; color: var(--text-mid); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .nav-item-badge {
+    padding: 3px 8px; border-radius: 8px; border: 1px solid; font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .nav-item-ayet { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .nav-item-ayet label { font-size: 12px; font-weight: 700; color: var(--text-mid); }
+  .nav-item-ayet input {
+    width: 56px; height: 38px; text-align: center; border: 1.5px solid var(--border); border-radius: 10px;
+    background: var(--surface); color: var(--text-dark); font-size: 15px; font-weight: 700;
+  }
+  .nav-item-ayet-go {
+    width: 36px; height: 38px; border-radius: 10px; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; color: #fff;
+  }
+  .nav-empty { padding: 40px 20px; text-align: center; color: var(--text-mid); font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="app-root">
+
+  <!-- ── Üst Navbar — Navbar.tsx: MUSHAF NAVBAR ── -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-titles">
+        <div class="t-main" id="tbSurah">—</div>
+        <div class="t-sub" id="tbJuzPage">—</div>
+      </div>
+      <div class="icon-pill" id="tbSearchBtn" title="Sayfaya git">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      </div>
+    </div>
+
+    <button class="play-toggle" id="tbPlayToggle">
+      <svg id="tbPlayIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      <span id="tbPlayLabel">Oynat</span>
+    </button>
+
+    <div class="topbar-right">
+      <div class="list-pill" id="tbListBtn" title="Sure listesi">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        <span>Liste</span>
+      </div>
+      <div class="icon-pill" id="tbMenuBtn" title="Ayarlar">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Hamburger Çekmecesi — HamburgerMenuPanel'in web karşılığı ── -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <div class="drawer-panel" id="drawerPanel">
+    <div class="drawer-header">
+      <div class="dh-title">
+        <div class="dh-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>
+        </div>
+        Ayarlar
+      </div>
+      <button class="drawer-close" id="drawerCloseBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+
+      <!-- Okuyucu -->
+      <div>
+        <div class="d-section-label">
+          <span class="dsl-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z"/><path d="M19 10v2a7 7 0 01-14 0v-2M12 19v4M8 23h8"/></svg></span>
+          Okuyucu
+        </div>
+        <div class="d-card" style="padding:0; overflow:hidden;">
+          <div class="reciter-row" id="reciterToggleRow">
+            <div>
+              <div class="rr-label">Okuyucu</div>
+              <div class="rr-name" id="reciterNameLabel">Sayfa Bazlı</div>
+            </div>
+            <svg id="reciterChevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="reciter-list" id="reciterList"></div>
+        </div>
+      </div>
+
+      <!-- Ters Terte Modu -->
+      <div>
+        <div class="d-section-label">
+          <span class="dsl-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M16 3l4 4-4 4M20 7H4M8 21l-4-4 4-4M4 17h16"/></svg></span>
+          Ters Terte Modu
+        </div>
+        <div class="toggle-row" id="reverseToggleRow">
+          <div class="tr-left">
+            <div class="tr-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg></div>
+            <div>
+              <div class="tr-title">Son Ayetten Dinle</div>
+              <div class="tr-desc" id="reverseDesc">Kapalı — Normal sırayla dinleniyor</div>
+            </div>
+          </div>
+          <div class="switch" id="reverseSwitch"><div class="knob"></div></div>
+        </div>
+      </div>
+
+      <!-- Oynatma Hızı -->
+      <div>
+        <div class="d-section-label">
+          <span class="dsl-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+          Oynatma Hızı
+        </div>
+        <div class="d-card"><div class="chip-row" id="speedChips"></div></div>
+      </div>
+
+      <!-- Tekrar Sayısı -->
+      <div>
+        <div class="d-section-label">
+          <span class="dsl-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg></span>
+          Tekrar Sayısı
+        </div>
+        <div class="d-card"><div class="chip-row" id="repeatCountChips"></div></div>
+      </div>
+
+      <!-- Tekrar Modu -->
+      <div>
+        <div class="d-section-label">
+          <span class="dsl-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 12a9 9 0 019-9 9 9 0 019 9 9 9 0 01-9 9 9 9 0 01-9-9z"/><path d="M12 8v4l3 2"/></svg></span>
+          Tekrar Modu
+        </div>
+        <div class="d-card">
+          <div class="chip-row" id="repeatModeChips"></div>
+          <div class="hint-box" id="rangeHintBox" style="display:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="flex-shrink:0;margin-top:1px;"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            <span>Mushaf'ta başlangıç ayetine (yeşil), bitiş ayetine (kırmızı) dokunun. Oynat'a basınca sadece o aralık tekrarlanır. Bir ayete uzun basarsanız (mavi), yalnızca o ayet sonsuz döngüde çalınır.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sayfa Arkaplan -->
+      <div>
+        <div class="d-section-label">
+          <span class="dsl-icon"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2a10 10 0 000 20 2 2 0 001.5-3.3 2 2 0 011.5-3.3H17a5 5 0 005-5A10 10 0 0012 2z"/></svg></span>
+          Sayfa Arkaplan
+        </div>
+        <div class="d-card"><div class="bg-swatch-row" id="bgSwatchRow"></div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Sure/Cüz/Sayfa Seçme Çekmecesi — NavModal'in web karşılığı ── -->
+  <div class="nav-drawer-overlay" id="navOverlay"></div>
+  <div class="nav-drawer-panel" id="navPanel">
+    <div class="nav-drawer-header">
+      <div class="ndh-title">
+        <div class="ndh-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>
+        </div>
+        Sayfaya Git
+      </div>
+      <button class="nav-drawer-close" id="navCloseBtn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+
+    <div class="nav-tabs" id="navTabs">
+      <div class="nav-tab tab-sure active" data-tab="sure">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z"/></svg>
+        <span>Sure</span>
+      </div>
+      <div class="nav-tab tab-cuz" data-tab="cüz">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21.21 15.89A10 10 0 118 2.83M22 12A10 10 0 0012 2v10z"/></svg>
+        <span>Cüz</span>
+      </div>
+      <div class="nav-tab tab-sayfa" data-tab="sayfa">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6M9 9h1"/></svg>
+        <span>Sayfa</span>
+      </div>
+    </div>
+
+    <div class="nav-search-box tab-sure" id="navSearchBox">
+      <svg id="navSearchIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="navSearchInput" placeholder="Sure ara…" autocomplete="off">
+      <span class="nav-search-clear" id="navSearchClear" style="display:none;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
+      </span>
+    </div>
+
+    <div class="nav-list" id="navList"></div>
+  </div>
+
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
+
+  <div class="page-viewport">
+    <div class="mushaf-card" id="mushafCard">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <div class="page-num-badge"><span id="pageNumText">1</span></div>
+      <div class="card-content"><div class="card-content-inner" id="pageContent"></div></div>
+    </div>
+  </div>
+
+  <div class="bottom-bar">
+    <button id="prevBtn" aria-label="Önceki sayfa" title="Önceki sayfa">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+    </button>
+    <div class="page-info">
+      <span class="surah-name" id="surahNameLabel">—</span>
+      <span id="juzPageLabel">—</span>
+    </div>
+    <div class="page-jump">
+      <span>Sayfa</span>
+      <input type="number" id="pageJumpInput" min="1" max="604" value="1">
+    </div>
+    <button id="nextBtn" aria-label="Sonraki sayfa" title="Sonraki sayfa">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+    </button>
+  </div>
+</div>
+
+<script type="module">
+const DATA_BASE = 'data/QuranData';
+const FONT_BASE = 'data/fonts/mushaf-font';
+
+const TOTAL_PAGES = 604;
+const toArabicNum = (n) => String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[+d]);
+
+const loadedFontPages = new Set();
+const fontLoadFailed = new Set();
+
+let PAGES_RAW = null;
+let WORDS_BY_ID = null;
+let PAGE_START = null;
+let JUZ_PAGES = null;
+let SAJDAH_KEYS = null;
+let LIGATURES = null;
+let TRANSLATE = null;
+let pagesByNumber = null;
+let SURAH_FIRST_PAGE = null; // Map<surahId, ilkSayfaNo>  — NavModal "Sure" sekmesi için
+
+function showStatus(msg, isError = false) {
+  let el = document.getElementById('statusBanner');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'statusBanner';
+    document.querySelector('.mushaf-card').appendChild(el);
+  }
+  el.className = 'status-banner' + (isError ? ' error' : '');
+  el.innerHTML = msg;
+}
+function hideStatus() {
+  const el = document.getElementById('statusBanner');
+  if (el) el.remove();
+}
+
+async function fetchJSON(path) {
+  const res = await fetch(path);
+  if (!res.ok) throw new Error(`${path} (HTTP ${res.status})`);
+  return res.json();
+}
+
+async function loadAllData() {
+  showStatus('Kuran verisi yükleniyor…');
+  try {
+    const [pages, words, pageStart, juzPages, sajda, ligatures] = await Promise.all([
+      fetchJSON(`${DATA_BASE}/pages.json`),
+      fetchJSON(`${DATA_BASE}/qpc-v1-glyph-codes-wbw.json`),
+      fetchJSON(`${DATA_BASE}/page_start.json`),
+      fetchJSON(`${DATA_BASE}/juz_pages.json`),
+      fetchJSON(`${DATA_BASE}/quran-metadata-sajda.json`),
+      fetchJSON(`data/fonts/Surah_Header/ligatures.json`),
+    ]);
+
+    PAGES_RAW = pages;
+    WORDS_BY_ID = new Map(Object.values(words).map(w => [w.id, w]));
+    PAGE_START = new Map(pageStart.map(p => [p.page, { surah: p.surah, ayah: p.ayah }]));
+    JUZ_PAGES = juzPages;
+    SAJDAH_KEYS = new Set(Object.values(sajda).map(s => s.verse_key));
+    LIGATURES = ligatures;
+
+    pagesByNumber = new Map();
+    for (const ln of PAGES_RAW) {
+      const arr = pagesByNumber.get(ln.page_number) ?? [];
+      arr.push(ln);
+      pagesByNumber.set(ln.page_number, arr);
+    }
+
+    // Sure → başladığı sayfa haritası (RN'deki surahPageMap/firstAyahPages
+    // karşılığı). PAGE_START zaten "bu sayfa hangi sure:ayet ile başlıyor"
+    // bilgisini taşıyor; her surenin en küçük sayfa numarasını (o surenin
+    // herhangi bir ayetinin göründüğü ilk sayfa) alarak türetiyoruz. Bu,
+    // "surah_name" satırlarının bulunduğu sayfayı bulmaktan daha güvenilirdir
+    // çünkü PAGES_RAW zaten tüm ayet-satırlarını (first_word_id üzerinden)
+    // içeriyor.
+    SURAH_FIRST_PAGE = new Map();
+    for (const ln of PAGES_RAW) {
+      if (ln.line_type !== 'ayah' || ln.first_word_id === '' || ln.first_word_id == null) continue;
+      const w = WORDS_BY_ID.get(ln.first_word_id);
+      if (!w) continue;
+      const s = +w.surah;
+      const cur = SURAH_FIRST_PAGE.get(s);
+      if (cur == null || ln.page_number < cur) SURAH_FIRST_PAGE.set(s, ln.page_number);
+    }
+
+    try {
+      // Bazı tarayıcı/sunucu kombinasyonlarında dinamik import(), göreli bir
+      // string specifier'ı ("data/QuranData/...") sayfa URL'sine göre değil,
+      // modülün KENDİ konumuna göre çözmeye çalışır ve "Failed to resolve
+      // module specifier" hatası verebilir. new URL(..., import.meta.url)
+      // ile bunu her zaman mutlak, geçerli bir URL'e çeviriyoruz.
+      const modUrl = new URL(`${DATA_BASE}/Translatesurah.js`, import.meta.url).href;
+      const mod = await import(modUrl);
+      TRANSLATE = mod.Translate;
+    } catch (e) {
+      console.warn('Translatesurah.js yüklenemedi, sure isimleri "Sure N" olarak gösterilecek:', e);
+      TRANSLATE = [];
+    }
+
+    hideStatus();
+    return true;
+  } catch (e) {
+    showStatus(
+      `<strong>Veri yüklenemedi.</strong><br><br>` +
+      `Bu dosyayı <code>file://</code> ile çift tıklayarak açtıysanız, ` +
+      `tarayıcı güvenlik nedeniyle yerel dosyaları okumayı engeller.<br><br>` +
+      `Klasörde bir terminal açıp:<br><code>python3 -m http.server 8000</code><br>` +
+      `çalıştırıp <code>http://localhost:8000/deneme.html</code> adresini açın ` +
+      `(ya da Live Server kullanıyorsanız, HTML'in bulunduğu klasörün ` +
+      `<code>data/</code> klasörünü de içerdiğinden emin olun).<br><br>` +
+      `<span style="font-size:10px; opacity:0.7;">Hata: ${e.message}</span>`,
+      true
+    );
+    return false;
+  }
+}
+
+const fontPromises = new Map();
+
+function loadPageFont(pageNum) {
+  if (fontPromises.has(pageNum)) return fontPromises.get(pageNum);
+  const fam = `MushafP${pageNum}`;
+  const url = `${FONT_BASE}/p${pageNum}.ttf`;
+  const face = new FontFace(fam, `url(${url})`);
+  const p = face.load().then(loaded => {
+    document.fonts.add(loaded);
+    loadedFontPages.add(pageNum);
+    return true;
+  }).catch(err => {
+    fontLoadFailed.add(pageNum);
+    console.warn(`p${pageNum}.ttf yüklenemedi (${FONT_BASE}/ altında yok mu?):`, err.message);
+    return false;
+  });
+  fontPromises.set(pageNum, p);
+  return p;
+}
+
+function getSurahTrName(surahNum) {
+  const s = (TRANSLATE || []).find(x => x.id === surahNum);
+  return s ? s.names[0] : ('Sure ' + surahNum);
+}
+function getJuzForPage(page) {
+  const jp = JUZ_PAGES.find(j => page >= j.start_page && page <= j.end_page);
+  return jp ? jp.juz : 1;
+}
+function buildPageLines(pageNum) {
+  const rawLines = pagesByNumber.get(pageNum) ?? [];
+  const lines = rawLines.map(ln => {
+    const entry = { t: ln.line_type, sn: ln.surah_number === '' ? null : ln.surah_number };
+    if (ln.line_type === 'ayah') {
+      const ws = [];
+      for (let id = ln.first_word_id; id <= ln.last_word_id; id++) {
+        const w = WORDS_BY_ID.get(id);
+        if (w) ws.push({ i: w.id, s: +w.surah, a: +w.ayah, w: +w.word, x: w.text });
+      }
+      entry.ws = ws;
+    }
+    return entry;
+  });
+
+  const verseLast = new Map();
+  for (const ln of lines) {
+    if (ln.t !== 'ayah') continue;
+    for (const w of ln.ws) {
+      const vk = `${w.s}:${w.a}`;
+      const cur = verseLast.get(vk);
+      if (!cur || w.w > cur.w) verseLast.set(vk, w);
+    }
+  }
+  const endIds = new Set([...verseLast.values()].map(w => w.i));
+  for (const ln of lines) {
+    if (ln.t !== 'ayah') continue;
+    for (const w of ln.ws) {
+      const vk = `${w.s}:${w.a}`;
+      if (endIds.has(w.i)) w.e = true;
+      if (SAJDAH_KEYS.has(vk)) w.sj = true;
+    }
+  }
+  return lines;
+}
+
+let currentPage = 1;
+let renderTokenCounter = 0;
+
+function pageFontFamily(pageNum) {
+  return `'MushafP${pageNum}'`;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SAYFA SONUNUN BOTTOM BAR'IN ALTINDA KALMASI — DÜZELTME
+//
+// Eski kod .mushaf-card yüksekliğini salt CSS ile `min(700px, 88vh)`
+// olarak sabitliyordu. Bu değer, topbar + progress-track + bottom-bar
+// gerçekte ne kadar yer kaplıyor bunu HİÇ hesaba katmıyordu — kısa
+// ekranlarda (ör. tarayıcı adres çubuğu açıkken) 88vh, page-viewport'un
+// gerçek boşluğundan daha büyük çıkabiliyor, kart taşıyor ve
+// .page-viewport { overflow:hidden } son satırı/rozet alanını kırpıyordu.
+//
+// Mushaf.tsx bunu gerçek `onLayout` ölçümüyle çözüyor (BASE_H = H - TOP_H
+// - BOTTOM_H - PROG_H - ...). Web tarafında aynı fikri uyguluyoruz:
+// kartı, .page-viewport'un GERÇEK piksel boyutuna göre JS ile ölçüp
+// sabitliyoruz. Böylece kart asla görünür alanın dışına taşamaz.
+function fitCardToViewport() {
+  const viewport = document.querySelector('.page-viewport');
+  const card = document.getElementById('mushafCard');
+  if (!viewport || !card) return;
+  const vpRect = viewport.getBoundingClientRect();
+  const availH = Math.max(200, vpRect.height - 12);  // padding: 6px üst+alt
+  const availW = Math.max(240, vpRect.width - 8);     // padding: 4px sağ+sol
+  card.style.height = Math.min(700, availH) + 'px';
+  card.style.width  = Math.min(430, availW) + 'px';
+}
+
+// İkinci güvenlik katmanı: kart doğru boyutlandırılmış olsa bile, çok
+// satırlı bazı sayfalarda metin yine de kartın iç alanından taşabilir.
+// Mushaf.tsx'teki buildFS() satır sayısına göre font/lineSpacing
+// küçültüyordu; burada aynı sonucu DOM'u ölçüp gerekirse tek parça
+// halinde ölçeklendirerek (transform: scale) elde ediyoruz — böylece
+// sayfanın SON satırı hiçbir zaman kırpılmaz / bottom bar'ın altında
+// kalmaz.
+function fitPageContent() {
+  const outer = document.querySelector('.card-content');
+  const inner = document.getElementById('pageContent');
+  if (!outer || !inner) return;
+
+  // Fontun gerçekten boyanmasını / layout'un oturmasını bekle — aksi halde
+  // (özellikle font-display:swap yüzünden) yedek fontla ölçüp yanlış
+  // sonuç üretebiliyorduk, bu da "hâlâ sığmıyor" şikayetinin sebeplerinden
+  // biriydi.
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    // Önce doğal (ölçeksiz) boyutu ölçmek için sıfırla.
+    inner.style.width = '100%';
+    inner.style.transform = 'none';
+
+    // ÖNEMLİ: outer.clientHeight, outer'ın KENDİ padding'ini de içerir
+    // (28px üst + 14px alt). Bunu düşmeden "kullanılabilir alan" sanmak,
+    // içeriğin gerçekte sığdığından ~40px daha fazla yer varmış gibi
+    // hesaplayıp son satırın hâlâ taşmasına yol açıyordu.
+    const cs = getComputedStyle(outer);
+    const padTop    = parseFloat(cs.paddingTop)    || 0;
+    const padBottom = parseFloat(cs.paddingBottom) || 0;
+    const availableH = outer.clientHeight - padTop - padBottom;
+    const naturalH = inner.scrollHeight;
+
+    if (availableH > 0 && naturalH > availableH) {
+      let scale = (availableH / naturalH) * 0.97; // güvenlik payı
+      scale = Math.max(0.55, Math.min(1, scale));
+      inner.style.width = (100 / scale) + '%';
+      inner.style.transform = `scale(${scale})`;
+      inner.style.transformOrigin = 'top center';
+    }
+  }));
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SURAH BANNER (SURE İSMİ LİGATÜRÜ) — GERÇEK BOYUTUNA GETİRME
+//
+// RN Mushaf.tsx'teki gerçek formül (satır ~540-575):
+//   bannerH     = max(44, fs.word * fs.lineSpacing * 1.35)
+//   ligFontSize = bannerH * 3.5      // banner yüksekliğinin 3.5 KATI!
+//   <Text adjustsFontSizeToFit minimumFontScale={0.1}>  // kutuya sığana kadar küçülür
+//
+// Yani ligatür fontu her zaman banner kutusunun kendisinden çok daha
+// büyük bir font-size ile başlar, sonra genişliğe göre otomatik
+// küçültülür. Eski web kodu sabit 30px kullanıyordu — bu yüzden çok
+// küçük görünüyordu. Burada aynı "büyük başla, sığana kadar küçült"
+// mantığını CSS font-size ile JS ölçüm döngüsü kullanarak uyguluyoruz.
+function fitSurahBanners() {
+  const run = () => {
+  document.querySelectorAll('.surah-banner').forEach(banner => {
+    const text = banner.querySelector('.surah-banner-text');
+    if (!text) return;
+    const bannerH = banner.clientHeight || 62;
+    const maxW = Math.max(20, banner.clientWidth - 4); // tam genişlik, sadece 4px güvenlik payı
+    const maxH = bannerH * 0.98;
+
+    // RN'deki ligFontSize = bannerH * 3.5 ile başla, adjustsFontSizeToFit
+    // gibi genişliğe/height'a sığana kadar küçült (minimumFontScale 0.1 ~ %10).
+    let fontSize = bannerH * 3.5;
+    const minFontSize = Math.max(8, bannerH * 0.35);
+    text.style.whiteSpace = 'nowrap';
+    text.style.display = 'inline-block';
+    text.style.fontSize = fontSize + 'px';
+    text.style.lineHeight = bannerH + 'px';
+
+    // İlk ölçüm: doğal (taşmasına izin verilen) genişlik/yükseklik.
+    let rect = text.getBoundingClientRect();
+
+    // Genişlik VE yükseklik sınırlarının ikisine de aynı anda uyacak
+    // oranı tek seferde hesapla (binary-search yerine doğrudan oran —
+    // font glyph'lerinin scrollWidth'i CSS transform'dan etkilenmediği
+    // için bu kesin ve hızlı çalışır).
+    if (rect.width > 0 && rect.height > 0) {
+      const scaleW = maxW / rect.width;
+      const scaleH = maxH / rect.height;
+      const scale = Math.min(1, scaleW, scaleH) * 0.97; // güvenlik payı
+      fontSize = Math.max(minFontSize, fontSize * scale);
+      text.style.fontSize = fontSize + 'px';
+      text.style.lineHeight = bannerH + 'px';
+    }
+
+    // Güvenlik ağı: yuvarlama hatalarından dolayı hâlâ taşıyorsa küçük
+    // adımlarla ince ayar yap (en fazla birkaç adım sürer).
+    let guard = 0;
+    while (guard++ < 15 && fontSize > minFontSize) {
+      rect = text.getBoundingClientRect();
+      if (rect.width <= maxW && rect.height <= maxH) break;
+      fontSize *= 0.95;
+      text.style.fontSize = fontSize + 'px';
+      text.style.lineHeight = bannerH + 'px';
+    }
+  });
+  };
+
+  // Ligatür fontu (QCFSurahHeader) tam yüklenmeden ölçüm yapılırsa yedek
+  // fontla yanlış boyut hesaplanır. document.fonts.load ile fontu açıkça
+  // isteyip document.fonts.ready ile birlikte bekliyoruz, sonra iki rAF
+  // ile layout'un oturmasını bekliyoruz.
+  const finish = () => requestAnimationFrame(() => requestAnimationFrame(run));
+  if (document.fonts && document.fonts.load) {
+    Promise.all([
+      document.fonts.load("48px 'QCFSurahHeader'").catch(() => {}),
+      document.fonts.ready,
+    ]).then(finish).catch(finish);
+  } else {
+    finish();
+  }
+}
+
+let resizeTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    fitCardToViewport();
+    fitPageContent();
+    fitSurahBanners();
+  }, 120);
+});
+
+function renderLine(line, container, pageNum) {
+  const qFont = pageFontFamily(pageNum);
+
+  if (line.t === 'surah_name') {
+    const banner = document.createElement('div');
+    banner.className = 'surah-banner';
+    const t = document.createElement('span');
+    t.className = 'surah-banner-text';
+    const lig = LIGATURES['surah-' + line.sn];
+    t.textContent = lig || getSurahTrName(line.sn);
+    if (!lig) t.style.fontFamily = "'Amiri', serif";
+    banner.appendChild(t);
+    container.appendChild(banner);
+    return;
+  }
+  if (line.t === 'basmallah') {
+    const p = document.createElement('div');
+    p.className = 'basmala-line';
+    p.style.fontFamily = qFont;
+    p.textContent = 'ﭑﭒﭓﭔﭕ';
+    container.appendChild(p);
+    return;
+  }
+  if (line.t === 'ayah') {
+    const p = document.createElement('div');
+    p.className = 'quran-line';
+    p.style.fontFamily = qFont;
+    line.ws.forEach(w => {
+      // Ayet sonu kelimesi (w.e), QPC verisinde ayetin gerçek son kelimesi
+      // DEĞİL — bizzat "ayet numarası" glyph'inin kendisidir (U+06DD +
+      // Arapça-Hint rakamları). Bu glyph, Mushaf fontuyla zaten dairesel bir
+      // ayet numarası olarak çiziliyor. Onu normal bir kelime gibi de
+      // basıp ÜSTÜNE kendi interaktif dairemizi eklersek iki daire üst
+      // üste biner (bildirdiğin hata). Mushaf.tsx'teki Satir bileşeni de
+      // isEndWord(w) ise ham glyph'i hiç basmıyor, sadece <AyetNo> koyuyor —
+      // burada da aynısını yapıyoruz: ham glyph'i ATLA, sadece daireyi bas.
+      if (w.e) {
+        const vk = `${w.s}:${w.a}`;
+        const circle = document.createElement('span');
+        circle.className = 'ayet-no';
+        circle.dataset.vk = vk;
+        const num = document.createElement('span');
+        num.style.fontFamily = qFont;
+        num.textContent = toArabicNum(w.a);
+        circle.appendChild(num);
+
+        // Uzun basış (500ms) tespiti — RN'deki delayLongPress={500} karşılığı.
+        // Uzun basış tetiklenirse ardından gelen 'click' olayı yutulur, böylece
+        // hem kısa hem uzun basış aynı anda tetiklenmez.
+        let pressTimer = null;
+        let longPressFired = false;
+        const startPress = () => {
+          longPressFired = false;
+          clearTimeout(pressTimer);
+          pressTimer = setTimeout(() => {
+            longPressFired = true;
+            handleVerseSingle(vk);
+          }, 500);
+        };
+        const cancelPress = () => clearTimeout(pressTimer);
+        circle.addEventListener('mousedown',  startPress);
+        circle.addEventListener('touchstart', startPress, { passive: true });
+        circle.addEventListener('mouseup',    cancelPress);
+        circle.addEventListener('mouseleave', cancelPress);
+        circle.addEventListener('touchend',   cancelPress);
+        circle.addEventListener('touchmove',  cancelPress);
+        circle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (longPressFired) { longPressFired = false; return; }
+          handleVerseSelect(vk);
+        });
+
+        p.appendChild(circle);
+        p.appendChild(document.createTextNode(' '));
+      } else {
+        const span = document.createElement('span');
+        span.className = 'word' + (w.sj ? ' sajdah' : '');
+        span.textContent = w.x + ' ';
+        span.title = `Sure ${w.s}, Ayet ${w.a}, Kelime ${w.w}`;
+        span.dataset.vk = `${w.s}:${w.a}`;
+        span.addEventListener('click', () => onWordClick(w));
+        p.appendChild(span);
+      }
+    });
+    container.appendChild(p);
+    return;
+  }
+}
+
+async function renderPage(n) {
+  n = Math.max(1, Math.min(TOTAL_PAGES, n));
+  currentPage = n;
+  const myToken = ++renderTokenCounter;
+
+  // Sayfa değişince o ana kadar çalan sesi durdur (RN: fetchVerses öncesi
+  // audioService.releaseVerse benzeri temizlik).
+  stopAllAudio();
+
+  const ps = PAGE_START.get(n);
+  const surahId = ps ? ps.surah : 1;
+  const juz = getJuzForPage(n);
+  document.getElementById('pageNumText').textContent = toArabicNum(n);
+  document.getElementById('surahNameLabel').textContent = getSurahTrName(surahId);
+  document.getElementById('juzPageLabel').textContent = `Cüz ${juz} · Sayfa ${n}`;
+  document.getElementById('progressFill').style.width = ((n / TOTAL_PAGES) * 100) + '%';
+  document.getElementById('pageJumpInput').value = n;
+  document.getElementById('tbSurah').textContent = getSurahTrName(surahId);
+  document.getElementById('tbJuzPage').textContent = `Cüz ${juz} · ${n}/${TOTAL_PAGES}`;
+  navStore.currentPage = n;
+  clearSelection(); // sayfa değişince ayet seçimini sıfırla (Mushaf.tsx'teki gibi)
+  fitCardToViewport();
+
+  const container = document.getElementById('pageContent');
+  container.innerHTML = '<div class="page-loading">Yükleniyor…</div>';
+
+  const ok = await loadPageFont(n);
+  loadPageFont(Math.min(TOTAL_PAGES, n + 1));
+
+  if (myToken !== renderTokenCounter) return;
+
+  if (!ok) {
+    container.innerHTML =
+      `<div class="page-loading" style="color:#b91c1c;">Bu sayfanın fontu yüklenemedi (p${n}.ttf).</div>`;
+    return;
+  }
+
+  const lines = buildPageLines(n);
+  container.innerHTML = '';
+  container.className = 'card-content-inner page-content-fade';
+  lines.forEach(line => renderLine(line, container, n));
+  applyPageBg(navStore.pageBgPresetId);
+  fitSurahBanners();
+  fitPageContent();
+
+  // Bu sayfanın ayet listesini (oynatma sırası için) oluştur.
+  buildPageVerseList(n);
+}
+
+function onWordClick(w) {
+  console.log('[Mushaf] kelime tıklandı:', `${w.s}:${w.a}:${w.w}`, 'id=' + w.i);
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// AYET SESİ ÇALMA
+//
+// QuranStore.ts'teki getVerseAudioUrl(reciterId, verseKey), sayısal
+// reciterId ile "verses.quran.com/{id}/mp3/{sss}{aaa}.mp3" şemasını
+// kullanıyordu — ama bu adres artık 404 veriyor (test edildi, doğrulandı).
+// Doğrulanan GÜNCEL çalışan şema, sayısal id yerine reciter KLASÖR ADI
+// kullanıyor: https://verses.quran.com/{ReciterFolder}/mp3/{sss}{aaa}.mp3
+// (örn. .../Alafasy/mp3/001001.mp3 — tarayıcıda gerçekten çalıyor).
+// Bu yüzden RECITERS listesindeki her okuyucuya bir `folder` alanı
+// ekledik ve URL fonksiyonu onu kullanıyor.
+// ═══════════════════════════════════════════════════════════════════
+function getVerseAudioUrl(reciterFolder, verseKey) {
+  const [s, a] = verseKey.split(':').map(n => String(n).padStart(3, '0'));
+  return `https://verses.quran.com/${reciterFolder}/mp3/${s}${a}.mp3`;
+}
+
+// Sayfa-bazlı okuyucu (PAGE_RECITER_ID) gerçek bir mp3 API'si gerektirdiği
+// için (QuranStore.ts: PAGE_API_URL/api/v1/audio/page/{n}), bu ortamda
+// erişilebilir değil. Ayet-ayet okuyuculardan biri seçiliyken gerçek ses
+// çalınır; "Sayfa Bazlı" seçiliyken kullanıcıyı bilgilendirip otomatik
+// olarak ilk gerçek okuyucuya (Mishary Alafasy) düşüyoruz.
+const VERSE_RECITERS = RECITERS_DEF => RECITERS_DEF.filter(r => !r.isPageBased);
+
+let pageVerseKeys = [];       // bu sayfadaki, sırayla, benzersiz "surah:ayah" listesi
+function buildPageVerseList(pageNum) {
+  const lines = pagesByNumber.get(pageNum) ?? [];
+  const seen = new Set();
+  const list = [];
+  for (const ln of lines) {
+    if (ln.line_type !== 'ayah') continue;
+    for (let id = ln.first_word_id; id <= ln.last_word_id; id++) {
+      const w = WORDS_BY_ID.get(id);
+      if (!w) continue;
+      const vk = `${w.surah}:${w.ayah}`;
+      if (!seen.has(vk)) { seen.add(vk); list.push(vk); }
+    }
+  }
+  pageVerseKeys = list;
+}
+
+const audioEl = new Audio();
+audioEl.preload = 'auto';
+// Tarayıcıda doğrulanmış tek adres — diğer okuyucuların klasör adı
+// yanlış çıkarsa bu her zaman devreye giren güvenli yedektir.
+const FALLBACK_RECITER_FOLDER = 'Alafasy';
+let playQueue = [];      // çalınacak "surah:ayah" sırası
+let playQueueIdx = -1;
+let playLoopSingle = false;   // tek ayet sonsuz döngü (mavi/uzun basış)
+let playLoopRange  = false;   // aralık sonsuz döngü (Tekrar Modu: Aralık)
+let currentAudioVK = null;
+let playTokenCounter = 0;
+
+function highlightPlayingVerse(vk) {
+  document.querySelectorAll('.word.playing').forEach(el => el.classList.remove('playing'));
+  document.querySelectorAll('.ayet-no.playing').forEach(el => el.classList.remove('playing'));
+  if (!vk) return;
+  document.querySelectorAll(`[data-vk="${vk}"]`).forEach(el => el.classList.add('playing'));
+}
+
+function stopAllAudio() {
+  playTokenCounter++; // bekleyen play() promise'lerini geçersiz kıl
+  audioEl.pause();
+  audioEl.removeAttribute('src');
+  playQueue = [];
+  playQueueIdx = -1;
+  playLoopSingle = false;
+  playLoopRange = false;
+  currentAudioVK = null;
+  highlightPlayingVerse(null);
+  setPlaying(false);
+}
+
+function activeVerseReciterFolder() {
+  // "Sayfa Bazlı" seçiliyken gerçek ayet sesi çalabilmek için ilk
+  // ayet-bazlı okuyucuya düşüyoruz (bu ortamda sayfa-mp3 API'si yok).
+  const r = activeReciter();
+  if (r.isPageBased) {
+    return VERSE_RECITERS(RECITERS)[0]?.folder ?? 'Alafasy';
+  }
+  return r.folder;
+}
+
+function playVerse(vk, isFallbackRetry) {
+  // Her playVerse çağrısına özgü bir "istek numarası" veriyoruz. Böylece
+  // hızlı ardışık çağrılarda (ör. bir ayet hata verip hemen sıradakine
+  // geçildiğinde) ESKİ çağrının play() promise'i reddedilse bile YENİ
+  // çağrıyı durdurmuyor / hatalı "Ses çalınamadı" uyarısı göstermiyoruz.
+  const myPlayToken = ++playTokenCounter;
+  currentAudioVK = vk;
+  highlightPlayingVerse(vk);
+  const folder = isFallbackRetry ? FALLBACK_RECITER_FOLDER : activeVerseReciterFolder();
+  const uri = getVerseAudioUrl(folder, vk);
+  console.log('[Mushaf] Ayet çalınıyor:', vk, uri);
+  audioEl.src = uri;
+  audioEl.playbackRate = navStore.playbackSpeed || 1;
+  audioEl.currentTime = 0;
+  const playPromise = audioEl.play();
+  if (playPromise && typeof playPromise.catch === 'function') {
+    playPromise.catch(err => {
+      // Bu çağrı artık "güncel" değilse (aradan yeni bir playVerse çağrısı
+      // geçtiyse), bu sadece src değişince tarayıcının eski isteği iptal
+      // etmesidir (AbortError / "interrupted by a call to pause()") —
+      // zararsızdır, yok sayıyoruz.
+      if (myPlayToken !== playTokenCounter) return;
+
+      // Seçili okuyucunun klasör adı yanlış/eksik olabilir (yalnızca
+      // 'Alafasy' doğrulanmış bir adrestir). İlk denemede başarısız
+      // olursa, sessizce doğrulanmış yedek okuyucuyla bir kez daha dene —
+      // kullanıcı gereksiz yere hata görmesin.
+      if (!isFallbackRetry && folder !== FALLBACK_RECITER_FOLDER) {
+        console.warn(`[Mushaf] '${folder}' klasörü çalışmadı, doğrulanmış yedek okuyucu (${FALLBACK_RECITER_FOLDER}) ile tekrar deneniyor:`, vk);
+        playVerse(vk, true);
+        return;
+      }
+
+      console.error('[Mushaf] Ses çalınamadı:', vk, uri, err);
+      showStatus(
+        `<strong>Ses çalınamadı.</strong><br><br>` +
+        `Ayet: <code>${vk}</code><br>` +
+        `Adres: <code>${uri}</code><br><br>` +
+        `Tarayıcı bu isteği engellemiş olabilir (ağ ayarları / CORS / ` +
+        `bağlantı yok). F12 → Console/Network sekmesine bakın.<br><br>` +
+        `<span style="font-size:10px; opacity:0.7;">Hata: ${err && err.message ? err.message : err}</span>`,
+        true
+      );
+      stopAllAudio();
+    });
+  }
+}
+
+function onVerseEnded() {
+  if (playLoopSingle) {
+    playVerse(currentAudioVK);
+    return;
+  }
+  if (playQueueIdx < playQueue.length - 1) {
+    playQueueIdx++;
+    playVerse(playQueue[playQueueIdx]);
+    return;
+  }
+  // Kuyruk bitti.
+  if (playLoopRange && playQueue.length > 0) {
+    playQueueIdx = 0;
+    playVerse(playQueue[0]);
+    return;
+  }
+  // Sayfa/aralık tamamlandı → durdur ve seçimi temizle (RN'deki
+  // "wasPlaying && !isPlayingAll" bloğuyla aynı davranış).
+  stopAllAudio();
+  clearSelection();
+}
+audioEl.addEventListener('ended', onVerseEnded);
+audioEl.addEventListener('error', (e) => {
+  // Bu, .catch bloğuyla aynı anda tetiklenebilen tarayıcı native hata
+  // olayıdır. onVerseEnded'i BURADAN çağırmıyoruz — .catch bloğu zaten
+  // stopAllAudio() ile akışı sonlandırıyor; ikisi birden çağrılırsa
+  // kuyruk çift ilerler / play() birbirini keser (bildirdiğin "interrupted
+  // by a call to pause()" hatasının asıl kaynağı buydu).
+  console.warn('[Mushaf] audio "error" event:', audioEl.error, 'src:', audioEl.src);
+});
+
+function startPlayback() {
+  console.log('[Mushaf] startPlayback çağrıldı. pageVerseKeys.length =', pageVerseKeys.length,
+              'seçim:', { selSingleVK, selStartVK, selEndVK });
+  if (pageVerseKeys.length === 0) {
+    console.error('[Mushaf] Bu sayfa için ayet listesi boş — çalınacak bir şey yok. ' +
+      'pagesByNumber veya WORDS_BY_ID henüz yüklenmemiş olabilir.');
+    showStatus(
+      `<strong>Bu sayfa için ayet listesi bulunamadı.</strong><br><br>` +
+      `Veri henüz tam yüklenmemiş olabilir; sayfayı yeniden açıp tekrar deneyin.`,
+      true
+    );
+    setPlaying(false);
+    return;
+  }
+
+  const repeatMode = navStore.repeatMode;
+  const isRangeMode = repeatMode === 'range';
+
+  if (selSingleVK) {
+    // Uzun basış → sadece bu ayeti sonsuz döngüde çal.
+    playQueue = [selSingleVK];
+    playQueueIdx = 0;
+    playLoopSingle = true;
+    playLoopRange = false;
+    playVerse(selSingleVK);
+  } else if (selStartVK && selEndVK) {
+    const [ss, sa] = selStartVK.split(':').map(Number);
+    const [es, ea] = selEndVK.split(':').map(Number);
+    const reversed = es < ss || (es === ss && ea < sa);
+    const realStart = reversed ? selEndVK : selStartVK;
+    const realEnd   = reversed ? selStartVK : selEndVK;
+    const si = pageVerseKeys.indexOf(realStart);
+    const ei = pageVerseKeys.indexOf(realEnd);
+    const from = Math.max(0, si === -1 ? 0 : si);
+    const to   = Math.max(from, ei === -1 ? pageVerseKeys.length - 1 : ei);
+    playQueue = pageVerseKeys.slice(from, to + 1);
+    playQueueIdx = 0;
+    playLoopSingle = false;
+    playLoopRange = isRangeMode;
+    playVerse(playQueue[0]);
+  } else if (selStartVK) {
+    const si = pageVerseKeys.indexOf(selStartVK);
+    const from = si === -1 ? 0 : si;
+    playQueue = pageVerseKeys.slice(from);
+    playQueueIdx = 0;
+    playLoopSingle = false;
+    playLoopRange = false;
+    playVerse(playQueue[0]);
+  } else {
+    // Seçim yok → tüm sayfayı baştan çal.
+    playQueue = pageVerseKeys.slice();
+    playQueueIdx = 0;
+    playLoopSingle = false;
+    playLoopRange = false;
+    playVerse(playQueue[0]);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// AYET ARALIĞI SEÇME — Mushaf.tsx'teki SelectedVerseCtx / handleVerseSelect
+// / handleVerseSingle / handleVerseClear ile BİREBİR aynı mantık:
+//
+//   Kısa dokunuş 1 → yeşil (aralık başı)
+//   Kısa dokunuş 2 → kırmızı (aralık sonu)
+//   Aynı ayete tekrar kısa dokunuş → seçimi temizler
+//   Üçüncü bir ayete kısa dokunuş (ikisi de doluyken) → yeni aralık başlar
+//   Uzun basış (500ms)  → mavi (sadece o ayet, aralık seçimini iptal eder)
+// ═══════════════════════════════════════════════════════════════════
+let selStartVK  = null;  // "surah:ayah"
+let selEndVK    = null;
+let selSingleVK = null;
+
+function updateRangeSelectionFlag() {
+  navStore.hasRangeSelection = !!(selStartVK || selEndVK || selSingleVK);
+  // Drawer açıksa Tekrar Modu listesi (Sayfa seçeneğinin gizlenmesi)
+  // anında güncellensin — Navbar.tsx'teki hasRangeSelection davranışı.
+  if (panel.classList.contains('open')) renderDrawer();
+}
+
+function refreshSelectionVisuals() {
+  document.querySelectorAll('.ayet-no[data-vk]').forEach(el => {
+    const vk = el.dataset.vk;
+    el.classList.toggle('selected-start',  vk === selStartVK);
+    el.classList.toggle('selected-end',    vk === selEndVK);
+    el.classList.toggle('selected-single', vk === selSingleVK);
+  });
+}
+
+function handleVerseSelect(vk) {
+  selSingleVK = null;
+  if (!selStartVK) {
+    selStartVK = vk;
+    selEndVK = null;
+  } else if (selStartVK === vk) {
+    selStartVK = null;
+    selEndVK = null;
+  } else if (!selEndVK) {
+    selEndVK = vk;
+  } else {
+    selEndVK = null;
+    selStartVK = vk;
+  }
+  updateRangeSelectionFlag();
+  refreshSelectionVisuals();
+}
+
+function handleVerseSingle(vk) {
+  selStartVK = null;
+  selEndVK = null;
+  selSingleVK = (selSingleVK === vk) ? null : vk;
+  updateRangeSelectionFlag();
+  refreshSelectionVisuals();
+}
+
+function clearSelection() {
+  selStartVK = null;
+  selEndVK = null;
+  selSingleVK = null;
+  updateRangeSelectionFlag();
+  refreshSelectionVisuals();
+}
+
+const PAGE_BG_PRESETS = [
+  { id: 'white', label: 'Beyaz', bg: '#FFFFFF', text: '#1A1A1A', isDark: false },
+  { id: 'cream', label: 'Saman', bg: '#FFF8E7', text: '#2C1F0E', isDark: false },
+  { id: 'sepia', label: 'Sepya', bg: '#F5E6C8', text: '#3B2A1A', isDark: false },
+  { id: 'gray',  label: 'Gri',   bg: '#E8E8E8', text: '#1A1A1A', isDark: false },
+  { id: 'black', label: 'Siyah', bg: '#0D0D0D', text: '#E8D5A3', isDark: true  },
+];
+const DEFAULT_PAGE_BG = PAGE_BG_PRESETS[0];
+
+// verses.quran.com üzerinde KLASÖR ADI (sayısal id değil) kullanan reciter
+// listesi. Yalnızca 'Alafasy' tarayıcıda gerçekten test edilip doğrulandı;
+// diğerleri quran.com'un bilinen klasör adlandırma kalıbına göre eklendi —
+// biri çalışmazsa Ayarlar'dan başka bir okuyucu seçip deneyebilirsiniz.
+const RECITERS = [
+  { id: 999, name: 'Hasan Hüseyin VAROL', style: 'Sayfa Bazlı', isPageBased: true, folder: 'Alafasy' },
+  { id: 7,   name: 'Mishari Rashid al-`Afasy',        folder: 'Alafasy' },
+  { id: 2,   name: 'AbdulBaset AbdulSamad', style: 'Murattal', folder: 'Abdul_Basit_Murattal_192kbps' },
+  { id: 3,   name: 'Abdur-Rahman as-Sudais',           folder: 'Abdurrahmaan_As-Sudais_192kbps' },
+  { id: 10,  name: "Sa`ud ash-Shuraym",                folder: 'Saood_ash-Shuraym_128kbps' },
+  { id: 4,   name: 'Abu Bakr al-Shatri',                folder: 'Abu_Bakr_Ash-Shaatree_128kbps' },
+];
+const PAGE_RECITER_ID = 999;
+
+const SPEED_ITEMS  = [{ label: '0.5×', value: 0.5 }, { label: '0.75×', value: 0.75 }, { label: '1×', value: 1 }, { label: '1.25×', value: 1.25 }, { label: '1.5×', value: 1.5 }, { label: '2×', value: 2 }];
+const REPEAT_COUNT_ITEMS = [{ label: '3×', value: 3 }, { label: '5×', value: 5 }, { label: '7×', value: 7 }, { label: '10×', value: 10 }, { label: '∞', value: Infinity }];
+const REPEAT_MODE_ITEMS_FULL  = [{ label: 'Kapalı', value: 'off' }, { label: 'Sayfa', value: 'page' }, { label: 'Ayet', value: 'verse' }, { label: 'Aralık', value: 'range' }];
+const REPEAT_MODE_ITEMS_RANGE = [{ label: 'Kapalı', value: 'off' }, { label: 'Ayet', value: 'verse' }, { label: 'Aralık Tekrarı', value: 'range' }];
+
+const navStore = {
+  surahAr: '', sureTr: '', surahId: null, juz: 1, currentPage: 1, totalPages: TOTAL_PAGES,
+  isPlayingAll: false, isLoadingAudio: false,
+  repeatCount: 1, playbackSpeed: 1, repeatMode: 'off',
+  reciterId: PAGE_RECITER_ID,
+  pageBgPresetId: 'white',
+  reversePlayMode: false,
+  hasRangeSelection: false,
+};
+
+function activeReciter() { return RECITERS.find(r => r.id === navStore.reciterId) ?? RECITERS[0]; }
+
+function applyPageBg(presetId) {
+  const preset = PAGE_BG_PRESETS.find(p => p.id === presetId) ?? DEFAULT_PAGE_BG;
+  const card = document.getElementById('mushafCard');
+  card.style.background = preset.bg;
+  card.querySelectorAll('.quran-line, .basmala-line').forEach(el => { el.style.color = preset.text; });
+  const banner = card.querySelector('.surah-banner-text');
+  if (banner) banner.style.color = preset.text;
+}
+
+function setPlaying(val) {
+  navStore.isPlayingAll = val;
+  const btn = document.getElementById('tbPlayToggle');
+  const icon = document.getElementById('tbPlayIcon');
+  const label = document.getElementById('tbPlayLabel');
+  btn.classList.toggle('playing', val);
+  icon.innerHTML = val
+    ? '<rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/>'
+    : '<path d="M8 5v14l11-7z"/>';
+  label.textContent = val ? 'Durdur' : 'Oynat';
+}
+document.getElementById('tbPlayToggle').addEventListener('click', () => {
+  console.log('[Mushaf] Oynat/Durdur butonuna tıklandı. isPlayingAll =', navStore.isPlayingAll);
+  const turningOn = !navStore.isPlayingAll;
+
+  if (turningOn) {
+    if (activeReciter().isPageBased) {
+      console.warn('[Mushaf] Sayfa Bazlı okuyucunun mp3 API adresi bu ortamda mevcut değil; ayet ayet çalan bir okuyucuya geçildi.');
+    }
+    setPlaying(true);
+    startPlayback();
+  } else {
+    stopAllAudio();
+    // Sayfa bitince/durunca seçim temizlenir — Mushaf.tsx'teki
+    // "wasPlaying && !isPlayingAll" bloğuyla aynı davranış.
+    clearSelection();
+  }
+});
+
+const overlay = document.getElementById('drawerOverlay');
+const panel   = document.getElementById('drawerPanel');
+function openDrawer() {
+  renderDrawer();
+  overlay.classList.add('open');
+  panel.classList.add('open');
+}
+function closeDrawer() {
+  overlay.classList.remove('open');
+  panel.classList.remove('open');
+  document.getElementById('reciterList').classList.remove('open');
+}
+document.getElementById('tbMenuBtn').addEventListener('click', openDrawer);
+document.getElementById('drawerCloseBtn').addEventListener('click', closeDrawer);
+overlay.addEventListener('click', closeDrawer);
+
+document.getElementById('tbSearchBtn').addEventListener('click', () => openNavDrawer('sure'));
+document.getElementById('tbListBtn').addEventListener('click', () => openNavDrawer('sure'));
+
+// ═══════════════════════════════════════════════════════════════════
+// SURE / CÜZ / SAYFA SEÇME ÇEKMECESİ — Mushaf.tsx'teki NavModal'in web
+// karşılığı. Navbar'daki arama ikonuna ("Sayfaya git") ya da "Liste"
+// butonuna tıklanınca açılır. Üç sekme: Sure (isimle arama + surenin
+// içinde belirli bir ayete atlama), Cüz (1-30 numara girişi), Sayfa
+// (1-604 numara girişi) — RN'deki activeTab / query / numInput state'i
+// ile birebir aynı davranış.
+// ═══════════════════════════════════════════════════════════════════
+const navOverlay = document.getElementById('navOverlay');
+const navPanel   = document.getElementById('navPanel');
+const navTabsEl  = document.getElementById('navTabs');
+const navSearchBox   = document.getElementById('navSearchBox');
+const navSearchIcon  = document.getElementById('navSearchIcon');
+const navSearchInput = document.getElementById('navSearchInput');
+const navSearchClear = document.getElementById('navSearchClear');
+const navListEl  = document.getElementById('navList');
+
+let navActiveTab = 'sure'; // 'sure' | 'cüz' | 'sayfa'
+const navAyahInputs = {};  // surahId -> girilen ayet no (RN'deki ayahInputs.current)
+
+const NAV_TAB_META = {
+  sure:  { label: 'Sure ara…',          icon: '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>', numeric: false },
+  'cüz': { label: '1 - 30',             icon: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 9h16M9 4v16"/>', numeric: true, min: 1, max: 30 },
+  sayfa: { label: `1 - ${TOTAL_PAGES}`, icon: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M4 9h16M9 4v16"/>', numeric: true, min: 1, max: TOTAL_PAGES },
+};
+
+function toLocalNumber(n) { return String(n); } // TR arayüzde Latin rakam yeterli; Arapça rakam sadece Mushaf sayfa numarasında kullanılıyor.
+
+function buildSureItems() {
+  const items = [];
+  for (const s of (TRANSLATE || [])) {
+    const localName = s.names?.[0] || `Sure ${s.id}`;
+    const arName = s.names?.[2] || '';
+    items.push({
+      type: 'sure', id: `s-${s.id}`, surahId: s.id,
+      ana: arName || localName, alt: arName ? localName : '',
+      sayfa: (SURAH_FIRST_PAGE && SURAH_FIRST_PAGE.get(s.id)) || 1,
+      renk: 'green', qText: `${localName} ${arName} ${s.id}`.toLocaleLowerCase('tr'),
+    });
+  }
+  return items;
+}
+function buildCuzItems() {
+  return (JUZ_PAGES || []).map(j => ({
+    type: 'cüz', id: `c-${j.juz}`,
+    ana: toLocalNumber(j.juz), alt: `${toLocalNumber(j.start_page)} - ${toLocalNumber(j.end_page)}`,
+    sayfa: j.start_page, renk: 'honey', qText: String(j.juz),
+  }));
+}
+function buildSayfaItems() {
+  const items = [];
+  for (let p = 1; p <= TOTAL_PAGES; p++) {
+    const ps = PAGE_START.get(p);
+    const juz = getJuzForPage(p);
+    const surahLabel = ps ? getSurahTrName(ps.surah) : '';
+    items.push({
+      type: 'sayfa', id: `p-${p}`,
+      ana: toLocalNumber(p), alt: ps ? `${surahLabel} · Cüz ${toLocalNumber(juz)}` : '',
+      sayfa: p, renk: 'blue', qText: String(p),
+    });
+  }
+  return items;
+}
+
+let navSureCache = null, navCuzCache = null, navSayfaCache = null;
+function navItemsForTab(tab) {
+  if (tab === 'sure')  return navSureCache  || (navSureCache  = buildSureItems());
+  if (tab === 'cüz')   return navCuzCache   || (navCuzCache   = buildCuzItems());
+  return navSayfaCache || (navSayfaCache = buildSayfaItems());
+}
+
+function navFilteredItems() {
+  const all = navItemsForTab(navActiveTab);
+  if (navActiveTab === 'sure') {
+    const q = navSearchInput.value.toLocaleLowerCase('tr').trim();
+    if (!q) return all;
+    return all.filter(it => it.qText.includes(q));
+  }
+  const q = navSearchInput.value.trim();
+  if (!q) return all;
+  return all.filter(it => it.qText.startsWith(q));
+}
+
+const NAV_ICONS = {
+  sure:  '<path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V2H6.5A2.5 2.5 0 004 4.5v15z"/>',
+  'cüz': '<path d="M21.21 15.89A10 10 0 118 2.83M22 12A10 10 0 0012 2v10z"/>',
+  sayfa: '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6M9 9h1"/>',
+};
+const NAV_COLOR = { green: 'var(--green)', honey: 'var(--honey)', blue: 'var(--blue-sel)' };
+
+function renderNavList() {
+  const items = navFilteredItems();
+  navListEl.innerHTML = '';
+  if (items.length === 0) {
+    navListEl.innerHTML = '<div class="nav-empty">Sonuç bulunamadı.</div>';
+    return;
+  }
+  const frag = document.createDocumentFragment();
+  items.forEach(it => {
+    const row = document.createElement('div');
+    row.className = 'nav-item';
+    const color = NAV_COLOR[it.renk];
+
+    const icon = document.createElement('div');
+    icon.className = 'nav-item-icon';
+    icon.style.background = color + '18';
+    icon.style.borderColor = color + '45';
+    icon.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2.2">${NAV_ICONS[it.type]}</svg>`;
+    row.appendChild(icon);
+
+    const body = document.createElement('div');
+    body.className = 'nav-item-body';
+    body.innerHTML = `<div class="nav-item-ana">${it.ana}</div>` +
+      (it.alt ? `<div class="nav-item-alt">${it.alt}</div>` : '');
+    row.appendChild(body);
+
+    if (it.type === 'sure') {
+      const ayetWrap = document.createElement('div');
+      ayetWrap.className = 'nav-item-ayet';
+      ayetWrap.innerHTML = `
+        <label>Ayet</label>
+        <input type="number" min="1" value="1">
+        <button class="nav-item-ayet-go" style="background:${color};">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6"><path d="M9 6l6 6-6 6"/></svg>
+        </button>`;
+      const ayetInput = ayetWrap.querySelector('input');
+      const ayetGoBtn = ayetWrap.querySelector('button');
+      ayetInput.addEventListener('click', e => e.stopPropagation());
+      ayetInput.addEventListener('input', () => {
+        navAyahInputs[it.surahId] = parseInt(ayetInput.value, 10) || 1;
+      });
+      ayetInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.stopPropagation(); navGotoSurahAyah(it.surahId, it.sayfa); }
+      });
+      ayetGoBtn.addEventListener('click', e => { e.stopPropagation(); navGotoSurahAyah(it.surahId, it.sayfa); });
+      row.appendChild(ayetWrap);
+    } else {
+      const badge = document.createElement('div');
+      badge.className = 'nav-item-badge';
+      badge.style.background = color + '12';
+      badge.style.borderColor = color + '30';
+      badge.style.color = color;
+      badge.textContent = `Sayfa ${toLocalNumber(it.sayfa)}`;
+      row.appendChild(badge);
+    }
+
+    row.addEventListener('click', () => { renderPage(it.sayfa); closeNavDrawer(); });
+    frag.appendChild(row);
+  });
+  navListEl.appendChild(frag);
+}
+
+function navGotoSurahAyah(surahId, fallbackPage) {
+  const ayetNo = Math.max(1, navAyahInputs[surahId] || 1);
+  // Ayetin GERÇEKTEN bulunduğu sayfayı bul (ayet sayfa sınırını aşsa da
+  // başladığı sayfayı verir) — WORDS_BY_ID üzerinden ilk kelimesinin
+  // (word=1) bulunduğu satırı arayarak.
+  let targetPage = fallbackPage;
+  for (const ln of PAGES_RAW) {
+    if (ln.line_type !== 'ayah' || ln.first_word_id === '' || ln.first_word_id == null) continue;
+    const w = WORDS_BY_ID.get(ln.first_word_id);
+    if (w && +w.surah === surahId && +w.ayah === ayetNo) { targetPage = ln.page_number; break; }
+  }
+  renderPage(targetPage);
+  closeNavDrawer();
+}
+
+function setNavTab(tab) {
+  navActiveTab = tab;
+  navTabsEl.querySelectorAll('.nav-tab').forEach(el => el.classList.toggle('active', el.dataset.tab === tab));
+  const meta = NAV_TAB_META[tab];
+  navSearchBox.className = 'nav-search-box' + ' tab-' + (tab === 'cüz' ? 'cuz' : tab) + (navSearchInput.value ? ' filled' : '');
+  navSearchIcon.innerHTML = meta.icon;
+  navSearchInput.placeholder = meta.label;
+  navSearchInput.value = '';
+  navSearchInput.type = meta.numeric ? 'text' : 'text';
+  navSearchInput.inputMode = meta.numeric ? 'numeric' : 'text';
+  navSearchClear.style.display = 'none';
+  renderNavList();
+  navListEl.scrollTop = 0;
+}
+
+navSearchInput.addEventListener('input', () => {
+  if (NAV_TAB_META[navActiveTab].numeric) {
+    navSearchInput.value = navSearchInput.value.replace(/[^0-9]/g, '');
+  }
+  navSearchClear.style.display = navSearchInput.value ? 'flex' : 'none';
+  const tabClass = 'tab-' + (navActiveTab === 'cüz' ? 'cuz' : navActiveTab);
+  navSearchBox.className = 'nav-search-box ' + tabClass + (navSearchInput.value ? ' filled' : '');
+  renderNavList();
+});
+navSearchInput.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter') return;
+  const meta = NAV_TAB_META[navActiveTab];
+  if (!meta.numeric) return;
+  const n = parseInt(navSearchInput.value, 10);
+  if (!isNaN(n) && n >= meta.min && n <= meta.max) {
+    if (navActiveTab === 'cüz') {
+      const found = (JUZ_PAGES || []).find(j => j.juz === n);
+      if (found) { renderPage(found.start_page); closeNavDrawer(); }
+    } else {
+      renderPage(n); closeNavDrawer();
+    }
+  }
+});
+navSearchClear.addEventListener('click', () => {
+  navSearchInput.value = '';
+  navSearchInput.dispatchEvent(new Event('input'));
+  navSearchInput.focus();
+});
+navTabsEl.querySelectorAll('.nav-tab').forEach(el => {
+  el.addEventListener('click', () => setNavTab(el.dataset.tab));
+});
+document.getElementById('navCloseBtn').addEventListener('click', closeNavDrawer);
+navOverlay.addEventListener('click', closeNavDrawer);
+
+function openNavDrawer(initialTab) {
+  navOverlay.classList.add('open');
+  navPanel.classList.add('open');
+  setNavTab(initialTab || 'sure');
+  setTimeout(() => navSearchInput.focus(), 300);
+}
+function closeNavDrawer() {
+  navOverlay.classList.remove('open');
+  navPanel.classList.remove('open');
+}
+
+function chip(label, active, onClick) {
+  const b = document.createElement('button');
+  b.className = 'chip' + (active ? ' active' : '');
+  b.textContent = label;
+  b.addEventListener('click', onClick);
+  return b;
+}
+
+function renderDrawer() {
+  document.getElementById('reciterNameLabel').textContent =
+    activeReciter().style ? `${activeReciter().name} (${activeReciter().style})` : activeReciter().name;
+  const list = document.getElementById('reciterList');
+  list.innerHTML = '';
+  RECITERS.forEach(r => {
+    const row = document.createElement('div');
+    row.className = 'reciter-item' + (r.id === navStore.reciterId ? ' active' : '');
+    row.textContent = r.style ? `${r.name} (${r.style})` : r.name;
+    row.addEventListener('click', () => {
+      navStore.reciterId = r.id;
+      list.classList.remove('open');
+      renderDrawer();
+      // Okuyucu değişince, o an çalıyorsa aynı ayetten yeni sesle devam et.
+      if (navStore.isPlayingAll && currentAudioVK) {
+        playVerse(currentAudioVK);
+      }
+    });
+    list.appendChild(row);
+  });
+
+  const revRow = document.getElementById('reverseToggleRow');
+  const revSwitch = document.getElementById('reverseSwitch');
+  revRow.classList.toggle('active', navStore.reversePlayMode);
+  revSwitch.classList.toggle('on', navStore.reversePlayMode);
+  document.getElementById('reverseDesc').textContent = navStore.reversePlayMode
+    ? 'Açık — Sayfa sonu → sayfa başı'
+    : 'Kapalı — Normal sırayla dinleniyor';
+
+  const speedRow = document.getElementById('speedChips');
+  speedRow.innerHTML = '';
+  SPEED_ITEMS.forEach(it => speedRow.appendChild(
+    chip(it.label, it.value === navStore.playbackSpeed, () => {
+      navStore.playbackSpeed = it.value;
+      audioEl.playbackRate = it.value;
+      renderDrawer();
+    })
+  ));
+
+  const repCountRow = document.getElementById('repeatCountChips');
+  repCountRow.innerHTML = '';
+  const activeCount = navStore.repeatMode === 'off' ? -1 : navStore.repeatCount;
+  REPEAT_COUNT_ITEMS.forEach(it => repCountRow.appendChild(
+    chip(it.label, it.value === activeCount, () => {
+      navStore.repeatCount = it.value;
+      if (navStore.repeatMode === 'off') navStore.repeatMode = 'verse';
+      renderDrawer();
+    })
+  ));
+
+  const modeItems = navStore.hasRangeSelection ? REPEAT_MODE_ITEMS_RANGE : REPEAT_MODE_ITEMS_FULL;
+  const modeRow = document.getElementById('repeatModeChips');
+  modeRow.innerHTML = '';
+  modeItems.forEach(it => modeRow.appendChild(
+    chip(it.label, it.value === navStore.repeatMode, () => {
+      navStore.repeatMode = it.value;
+      if (navStore.isPlayingAll) {
+        playLoopRange = (it.value === 'range') && selStartVK && selEndVK;
+      }
+      renderDrawer(); closeDrawer();
+    })
+  ));
+  document.getElementById('rangeHintBox').style.display = navStore.repeatMode === 'range' ? 'flex' : 'none';
+
+  const bgRow = document.getElementById('bgSwatchRow');
+  bgRow.innerHTML = '';
+  PAGE_BG_PRESETS.forEach(preset => {
+    const active = navStore.pageBgPresetId === preset.id;
+    const wrap = document.createElement('button');
+    wrap.className = 'bg-swatch' + (active ? ' active' : '');
+    wrap.innerHTML = `
+      <span class="sw-outer"><span class="sw-inner" style="background:${preset.bg};">
+        ${active ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="${preset.isDark ? '#fff' : '#3b3b3b'}" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>` : ''}
+      </span></span>
+      <span class="sw-label">${preset.label}</span>`;
+    wrap.addEventListener('click', () => {
+      if (active) return;
+      navStore.pageBgPresetId = preset.id;
+      applyPageBg(preset.id);
+      renderDrawer();
+    });
+    bgRow.appendChild(wrap);
+  });
+}
+
+document.getElementById('reciterToggleRow').addEventListener('click', () => {
+  document.getElementById('reciterList').classList.toggle('open');
+});
+document.getElementById('reverseToggleRow').addEventListener('click', () => {
+  navStore.reversePlayMode = !navStore.reversePlayMode;
+  renderDrawer();
+});
+
+document.getElementById('prevBtn').addEventListener('click', () => renderPage(currentPage - 1));
+document.getElementById('nextBtn').addEventListener('click', () => renderPage(currentPage + 1));
+document.getElementById('pageJumpInput').addEventListener('change', (e) => {
+  const n = parseInt(e.target.value, 10);
+  if (Number.isFinite(n)) renderPage(n);
+});
+
+let touchStartX = null;
+const viewport = document.querySelector('.page-viewport');
+viewport.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+viewport.addEventListener('touchend', e => {
+  if (touchStartX === null) return;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (Math.abs(dx) > 50) {
+    if (dx < 0) renderPage(currentPage + 1);
+    else renderPage(currentPage - 1);
+  }
+  touchStartX = null;
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') renderPage(currentPage + 1);
+  if (e.key === 'ArrowRight') renderPage(currentPage - 1);
+});
+
+(async function init() {
+  fitCardToViewport();
+  const ok = await loadAllData();
+  if (ok) renderPage(1);
+})();
+</script>
+
+</body>
+</html>

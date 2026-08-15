@@ -1,0 +1,667 @@
+{
+  "uygulama": "ReisulQurra",
+  "versiyon": "1.0.0",
+  "ozellikler": {
+    "ana_ekran": {
+      "baslik": "Ana Ekran (Home)",
+      "ozellikler": [
+        {
+          "id": "home_agac",
+          "ad": "Dinamik Ağaç Görselleştirmesi",
+          "aciklama": "Kullanıcının ezber ve streak alışkanlığına göre sağlığı değişen animasyonlu ağaç. Yeşil → sarı → turuncu → solmuş 4 renk aşaması.",
+          "teknik": "SVG tabanlı, 110 yaprak noktası, VB_W=1057.5 VB_H=1687.5 viewBox, calcTreeHealth() ile streak*12 + weekDone*4 = 0-100 skor",
+          "gorsel_url": null
+        },
+        {
+          "id": "home_streak",
+          "ad": "Günlük Seri (Streak) Takibi",
+          "aciklama": "Ardışık çalışma günlerini sayan, motive edici özel mesajlar sunan ilerleme kartı.",
+          "teknik": "calcStreak() ile kayıt tarihlerinden geriye dönük hesaplama",
+          "gorsel_url": null
+        },
+        {
+          "id": "home_devam",
+          "ad": "Kaldığın Yerden Devam Et Kartı",
+          "aciklama": "En son çalışılan sureyi/sayfayı hatırlayan, tek tıkla o oturuma yönlendiren hızlı erişim kartı.",
+          "teknik": "LastSessionStore ile beslenir",
+          "gorsel_url": null
+        },
+        {
+          "id": "home_menu",
+          "ad": "Dairesel Menü",
+          "aciklama": "Kuran, Ezber, Hatim, Sınav, İstatistik ve Ayarlar modüllerine organik daire düzeniyle erişim. Her dairenin boyutu önem hiyerarşisini yansıtır.",
+          "teknik": "SVG tabanlı organik navigasyon, react-native-svg",
+          "gorsel_url": null
+        },
+        {
+          "id": "home_onboarding",
+          "ad": "Spotlight Onboarding",
+          "aciklama": "İlk kez giren kullanıcılar için ekranı karartıp butonları sırayla tanıtan rehber sistemi.",
+          "teknik": "measureInWindow ile hedef elemanları ölçer, Spotlight Onboarding v2",
+          "gorsel_url": null
+        },
+        {
+          "id": "home_landscape",
+          "ad": "Yatay Mod Desteği",
+          "aciklama": "Landscape modunda banner %40 sol + ağaç %60 sağ yatay split layout.",
+          "teknik": "useAdaptive() hook, portrait lock desteği",
+          "gorsel_url": null
+        },
+        {
+          "id": "home_drag",
+          "ad": "Drag-to-Continue Hareketi",
+          "aciklama": "PanResponder ile sürükleyerek seansa devam etme jest desteği.",
+          "teknik": "PanResponder",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "kuran_okuyucu": {
+      "baslik": "Kuran Okuyucu (Quran.tsx)",
+      "ozellikler": [
+        {
+          "id": "quran_liste",
+          "ad": "Optimize Ayet Listesi",
+          "aciklama": "Yüksek performanslı virtualized liste ile 6000+ ayetin akıcı gösterimi.",
+          "teknik": "@shopify/flash-list 2.0, getItemType: bismillah/verse ayrımı",
+          "gorsel_url": null
+        },
+        {
+          "id": "quran_kelime_ses",
+          "ad": "Kelime Bazlı Ses Oynatma",
+          "aciklama": "Her kelimeye dokunarak yalnızca o kelimenin sesini dinleyebilme.",
+          "teknik": "onPress → playWordAudio(), kelime pozisyonu ile sync tracking",
+          "gorsel_url": null
+        },
+        {
+          "id": "quran_gizle_goster",
+          "ad": "Gizle / Göster (Ezber) Modu",
+          "aciklama": "Ayetleri gizleyip kullanıcının ezberden okumasını sağlayan mod.",
+          "teknik": "Zustand local useAudioStore, hiddenVerses Set",
+          "gorsel_url": null
+        },
+        {
+          "id": "quran_navigasyon",
+          "ad": "Sure / Sayfa / Cüz Sekmeli Navigasyon",
+          "aciklama": "3 sekme arasında geçiş yaparak istenen yere atlama. 604 sayfa ve cüz grid modalı.",
+          "teknik": "FlashList scrollToIndex, ALL_PAGES (604) ve JUZ_GRID_ITEMS",
+          "gorsel_url": null
+        },
+        {
+          "id": "quran_oynatici",
+          "ad": "Sabit Alt Oynatıcı Çubuğu",
+          "aciklama": "Ekranın altında sabit kalan oynatma kontrol çubuğu.",
+          "teknik": "QuranStore: playingVerseKey, playingWord, tekrar/hız state",
+          "gorsel_url": null
+        },
+        {
+          "id": "quran_tekrar",
+          "ad": "Döngü (Loop) Seçenekleri",
+          "aciklama": "1, 2, 3, 4, 5, 10 ve Sonsuz (∞) tekrar seçenekleri.",
+          "teknik": "QuranStore tekrar sayısı state",
+          "gorsel_url": null
+        },
+        {
+          "id": "quran_hiz",
+          "ad": "Oynatma Hızı",
+          "aciklama": "0.25x, 0.5x, 1x, 1.25x, 1.5x, 2x hız seçenekleri.",
+          "teknik": "QuranStore hız state",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "mushaf": {
+      "baslik": "Mushaf Görünümü (Mushaf.tsx)",
+      "ozellikler": [
+        {
+          "id": "mushaf_tam",
+          "ad": "Tam Mushaf — 604 Sayfa",
+          "aciklama": "Dikey modda FlatList ile sayfa kaydırma, yatay modda ScrollView ile geniş görünüm.",
+          "teknik": "Portrait: FlatList horizontal=false. Landscape: ScrollView + scaleX:-1 dönüşümü",
+          "gorsel_url": null
+        },
+        {
+          "id": "mushaf_pinch",
+          "ad": "Pinch-to-Zoom",
+          "aciklama": "İki parmakla sayfayı büyütüp küçültebilme ve sürükleyerek (pan) okuyabilme.",
+          "teknik": "react-native-gesture-handler",
+          "gorsel_url": null
+        },
+        {
+          "id": "mushaf_font",
+          "ad": "Otomatik Font Boyutu Hesabı",
+          "aciklama": "Kart genişliği ve yüksekliğine göre 15 satırlık max font hesabı. İlk 2 sayfa için özel boyut.",
+          "teknik": "calcFontSizes(), FS_LS_SPECIAL: ilk 2 sayfa özel",
+          "gorsel_url": null
+        },
+        {
+          "id": "mushaf_ayet_secim",
+          "ad": "Ayet Seçimi ve Döngü",
+          "aciklama": "Tek tıkla başlangıç/bitiş ayeti seçme, uzun basışla sonsuz döngü modu.",
+          "teknik": "QuranStore loop state",
+          "gorsel_url": null
+        },
+        {
+          "id": "mushaf_arka_plan",
+          "ad": "Arka Plan Rengi Seçimi",
+          "aciklama": "Göz yorgunluğunu azaltmak için farklı renk önayarları.",
+          "teknik": "ThemeContext renk seçimi",
+          "gorsel_url": null
+        },
+        {
+          "id": "mushaf_navigasyon_modal",
+          "ad": "Hızlı Gezinme Modalı",
+          "aciklama": "Sure, Cüz veya Sayfa numarasına göre arama yapıp hızlıca atlama.",
+          "teknik": "MushafNavStore",
+          "gorsel_url": null
+        },
+        {
+          "id": "mushaf_yer_imi",
+          "ad": "Yer İmi (Bookmark)",
+          "aciklama": "Sayfalara ayraç ekleyebilme, Toast bildirimiyle onay alma.",
+          "teknik": "expo-secure-store kalıcı saklama",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "ezber_serans": {
+      "baslik": "Sesli Ezber Seansı (Ezberscreen.tsx)",
+      "ozellikler": [
+        {
+          "id": "ezber_stt",
+          "ad": "Akıllı Ses Tanıma (STT)",
+          "aciklama": "Kullanıcının okuduğu ayetleri mikrofon ile dinleyip metinle eşleştiren doğruluk kontrol sistemi.",
+          "teknik": "ExpoSpeechRecognitionModule.start({lang:'ar-SA'}), continuous=false, interimResults=false",
+          "gorsel_url": null
+        },
+        {
+          "id": "ezber_canli_vurgu",
+          "ad": "Canlı Kelime Vurgulama",
+          "aciklama": "Okunan kelimelerin doğruysa yeşil, yanlışsa kırmızı renkle anlık boyanması.",
+          "teknik": "similarity() Levenshtein benzeri algoritma",
+          "gorsel_url": null
+        },
+        {
+          "id": "ezber_hata_ses",
+          "ad": "Otomatik Hata Düzeltme Sesleri",
+          "aciklama": "Kullanıcı takıldığında veya yanlış okuduğunda uyarı sesi verip doğruyu otomatik dinletme.",
+          "teknik": "WRONGS_BEFORE_LISTEN=5, WRONGS_AFTER_LISTEN=3",
+          "gorsel_url": null
+        },
+        {
+          "id": "ezber_taktik",
+          "ad": "Taktik Sistemi (Adım Adım)",
+          "aciklama": "steps[].action ile tanımlı adımlar (oku/gizle/kontrol) sırayla uygulanır.",
+          "teknik": "EzberSessionStore: items[], initialIndex, tacticKey",
+          "gorsel_url": null
+        },
+        {
+          "id": "ezber_mushaf_tam_ekran",
+          "ad": "Tam Ekran Mushaf + Overlay",
+          "aciklama": "Mushaf sayfası tam ekran, üstte sayfa numarası overlay, altta FAB kontrol çubuğu.",
+          "teknik": "FAB_BUMP_H=72, useSafeAreaInsets() insets.top+2",
+          "gorsel_url": null
+        },
+        {
+          "id": "ezber_haptics",
+          "ad": "Dokunsal Geri Bildirim",
+          "aciklama": "Doğru/yanlış okumalarda ve mikrofon açılışında cihaza hafif titreşim.",
+          "teknik": "expo-haptics",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "ezber_plan": {
+      "baslik": "Akıllı Ezber Planı (EzberPlan.tsx)",
+      "ozellikler": [
+        {
+          "id": "plan_metodlar",
+          "ad": "10 Geleneksel Ezber Metodu",
+          "aciklama": "Ottoman, Güney Asya, Mısır, linear_az/za, Somali, Mufassal, Important, short_to_long, long_to_short metodları.",
+          "teknik": "runMethod() ile schedule[] oluşturma, lib/metot/Algoritma.ts",
+          "gorsel_url": null
+        },
+        {
+          "id": "plan_taktikler",
+          "ad": "3 Ezber Taktiği",
+          "aciklama": "6-4-4-6 (klasik Osmanlı tekrarı), 3x3, 10+3 teknikleri.",
+          "teknik": "SecureStore: method, tactic, pagesPerDay, surahsPerDay şifreli saklama",
+          "gorsel_url": null
+        },
+        {
+          "id": "plan_swipe",
+          "ad": "Kaydırmalı Plan Kartları",
+          "aciklama": "Günlük hedefleri sağa kaydırarak 'Ezberlendi' işaretleme, sola kaydırarak geri alma.",
+          "teknik": "Swipe gesture handler",
+          "gorsel_url": null
+        },
+        {
+          "id": "plan_vird",
+          "ad": "VIRD Aralıklı Tekrar Sistemi",
+          "aciklama": "Öğrenilen yerlerin T1, T2, T3 periyotlarla tekrar edilmesini sağlayan algoritma.",
+          "teknik": "Algoritma.ts periyot hesabı",
+          "gorsel_url": null
+        },
+        {
+          "id": "plan_gpuan",
+          "ad": "G-Puanı Değerlendirmesi",
+          "aciklama": "1 (Başarısız) ile 5 (Mükemmel) arasında puanlama yapılabilen geri bildirim modalı.",
+          "teknik": "EzberSessionStore",
+          "gorsel_url": null
+        },
+        {
+          "id": "plan_tempo",
+          "ad": "Ezber Rotası / Tempo Seçimi",
+          "aciklama": "Medrese, Öğrenci, Yoğun gibi tempo seçenekleri ile anında metot güncelleme.",
+          "teknik": "SecureStore kalıcı kayıt",
+          "gorsel_url": null
+        },
+        {
+          "id": "plan_sticky_bar",
+          "ad": "Yapışkan Mini Bar",
+          "aciklama": "Scroll aşağı inerken beliren mevcut metot özetini gösteren sabit çubuk.",
+          "teknik": "scrollY interpolation → opacity animasyonu, COLLAPSE_SCROLL=120",
+          "gorsel_url": null
+        },
+        {
+          "id": "plan_arama",
+          "ad": "Arama Modalı (İleri Sarma)",
+          "aciklama": "globalIndex → sayfa + scrollToIndex ile hedef karta atlama.",
+          "teknik": "PAGE_SIZE=10 sayfalandırma",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "istatistik": {
+      "baslik": "İstatistikler ve Gelişim Takibi (EzberIstatistik.tsx)",
+      "ozellikler": [
+        {
+          "id": "istat_halka",
+          "ad": "Performans Halkası",
+          "aciklama": "Toplam hedefin yüzde kaçının tamamlandığını gösteren dairesel ilerleme çubuğu.",
+          "teknik": "Animated.timing fadeAnim, 380ms fade-in",
+          "gorsel_url": null
+        },
+        {
+          "id": "istat_grafik",
+          "ad": "Haftalık / 30 Günlük Aktivite Grafiği",
+          "aciklama": "Son 30 günde hangi gün kaç birim ezber yapıldığını gösteren bar grafik.",
+          "teknik": "buildDayCounts() normalize edilmiş veri",
+          "gorsel_url": null
+        },
+        {
+          "id": "istat_heatmap",
+          "ad": "Sure Isı Haritası",
+          "aciklama": "114 surenin tamamlanma yüzdesini gösteren ızgara haritası. Tamamlananlar renkli, yarım kalanlar parçalı, başlanmayanlar gri.",
+          "teknik": "surahGrid, ezberUniqueKey eşleşmesi",
+          "gorsel_url": null
+        },
+        {
+          "id": "istat_tablo",
+          "ad": "Cüz / Sayfa / Sure Bazlı İlerleme Tablosu",
+          "aciklama": "tableTab state ile 3 farklı bakış açısında öğrenme ilerlemesi.",
+          "teknik": "tableTab: juz/page/surah",
+          "gorsel_url": null
+        },
+        {
+          "id": "istat_sifirla",
+          "ad": "Tehlike Alanı — Tüm İlerlemeyi Sıfırla",
+          "aciklama": "Onaylı ve güvenlik uyarılı ilerleme temizleme butonu.",
+          "teknik": "Onay modalı zorunlu",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "quiz": {
+      "baslik": "Quiz / Sınav (Quiz.tsx)",
+      "ozellikler": [
+        {
+          "id": "quiz_modlar",
+          "ad": "4 Quiz Modu",
+          "aciklama": "Eksik kelime (missing-word), Ayet navigasyonu (verse-nav), Çoktan seçmeli (selection), Karışık (mixed) ve Hafızlık Simülasyonu (Mushaf tam sayfa).",
+          "teknik": "Qurantesthelpers, mod parametresi",
+          "gorsel_url": null
+        },
+        {
+          "id": "quiz_zorluk",
+          "ad": "3 Zorluk Seviyesi",
+          "aciklama": "Easy, Medium, Hard — her seviyede farklı XP çarpanı.",
+          "teknik": "XP_BY_DIFFICULTY çarpanı",
+          "gorsel_url": null
+        },
+        {
+          "id": "quiz_alan",
+          "ad": "Esnek Alan Seçimi",
+          "aciklama": "Cüz aralığı, sayfa aralığı veya sure listesiyle soru havuzu belirleme.",
+          "teknik": "Kurulum ekranı sorgu havuzu filtresi",
+          "gorsel_url": null
+        },
+        {
+          "id": "quiz_can",
+          "ad": "Can (Heart) Sistemi",
+          "aciklama": "Varsayılan 3 can, her yanlış cevapta azalır. Oyunlaştırılmış hata yönetimi.",
+          "teknik": "testState.hearts",
+          "gorsel_url": null
+        },
+        {
+          "id": "quiz_xp",
+          "ad": "XP Sistemi",
+          "aciklama": "Her doğru cevapta kazanılan deneyim puanı. Anlık feedback banner ile gösterilir.",
+          "teknik": "XP_BY_DIFFICULTY",
+          "gorsel_url": null
+        },
+        {
+          "id": "quiz_drag_drop",
+          "ad": "Sürükle & Bırak Ayet Sıralama",
+          "aciklama": "Karışık verilen ayetleri sürükleyerek doğru sıraya koyma modu.",
+          "teknik": "react-native-gesture-handler",
+          "gorsel_url": null
+        },
+        {
+          "id": "quiz_feedback",
+          "ad": "Anlık Geri Bildirim Afişleri",
+          "aciklama": "Cevap verilince alt kısımdan çıkan XP + doğru/yanlış dinamik bilgi çubuğu.",
+          "teknik": "Animated feedback banner",
+          "gorsel_url": null
+        },
+        {
+          "id": "quiz_sonuc",
+          "ad": "Sonuç Modalı",
+          "aciklama": "Test bitiminde doğruluk, XP, süre, en uzun seriyi özetleyen ekran. Tek tıkla yeniden başlatma.",
+          "teknik": "correctRef, wrongRef, maxStreakRef → SQLite kayıt (TestHistoryService)",
+          "gorsel_url": null
+        },
+        {
+          "id": "quiz_setup_anim",
+          "ad": "Kurulum Ekranı Animasyonu",
+          "aciklama": "SetupScreen için fadeIn + slideY giriş animasyonu.",
+          "teknik": "Animated.timing",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "kisa_sure": {
+      "baslik": "Kısa Sure & Dua Okuma (KisaSure)",
+      "ozellikler": [
+        {
+          "id": "kisasure_swipe",
+          "ad": "Yatay Kaydırılabilir Dua Kartları",
+          "aciklama": "Sureler ve dualar arasında sağa/sola kaydırarak (Paging) geçiş.",
+          "teknik": "Horizontal pager",
+          "gorsel_url": null
+        },
+        {
+          "id": "kisasure_gizle",
+          "ad": "Ezber (Gizle/Göster) Modu",
+          "aciklama": "Ayetleri başlangıçta gizleyip adım adım animasyonlu görünür yapma.",
+          "teknik": "revealedCount state, animasyonlu reveal",
+          "gorsel_url": null
+        },
+        {
+          "id": "kisasure_durak",
+          "ad": "İnteraktif Durak Noktaları",
+          "aciklama": "Ayet sonundaki durak işaretlerine dokunarak sadece o cümlenin telaffuzunu dinleme.",
+          "teknik": "playingDurakId state",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "ses_indirme": {
+      "baslik": "Ses & İndirme Yöneticisi (AudioDownload.tsx)",
+      "ozellikler": [
+        {
+          "id": "ses_hafiz_secim",
+          "ad": "Çoklu Hafız Seçimi",
+          "aciklama": "Farklı imamların ses kayıtları arasında stil ve isim bazlı geçiş.",
+          "teknik": "QuranApiService karigraf seçimi",
+          "gorsel_url": null
+        },
+        {
+          "id": "ses_offline",
+          "ad": "Çevrimdışı (Offline) İndirme",
+          "aciklama": "Sayfa, sure veya cüz bazlı ses dosyalarını cihaza indirme.",
+          "teknik": "expo-file-system, STORAGE_KEY='quran-offline-packages-v1'",
+          "gorsel_url": null
+        },
+        {
+          "id": "ses_concurrent",
+          "ad": "Eş Zamanlı İndirme Yöneticisi",
+          "aciklama": "4 eş zamanlı indirme limiti ile queue yönetimi ve ilerleme göstergesi.",
+          "teknik": "runConcurrent(), DOWNLOAD_CONCURRENCY=4",
+          "gorsel_url": null
+        },
+        {
+          "id": "ses_cuz",
+          "ad": "Toplu Cüz İndirme",
+          "aciklama": "30 cüzün tamamı için toplu indirme desteği.",
+          "teknik": "JUZ_COUNT=30",
+          "gorsel_url": null
+        },
+        {
+          "id": "ses_online_badge",
+          "ad": "Online / Offline Durum Göstergesi",
+          "aciklama": "Header'da bağlantı durumunu gösteren badge.",
+          "teknik": "expo-network isConnected",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "ayarlar": {
+      "baslik": "Ayarlar ve Kişiselleştirme (Settings.tsx)",
+      "ozellikler": [
+        {
+          "id": "ayar_tema",
+          "ad": "Tema Seçimi",
+          "aciklama": "Ana temalar ve erişilebilirlik (a11y) temaları ayrı gruplar halinde. Renk körlüğü, yüksek kontrast, odaklanma modları.",
+          "teknik": "ThemeModal: main ve a11y tema grupları, ThemeContext (SecureStore)",
+          "gorsel_url": null
+        },
+        {
+          "id": "ayar_sistem_tema",
+          "ad": "Sistem Teması Senkronizasyonu",
+          "aciklama": "Uygulamanın temasını iOS/Android gece/gündüz döngüsüne bağlayabilme.",
+          "teknik": "useColorScheme() hook",
+          "gorsel_url": null
+        },
+        {
+          "id": "ayar_font",
+          "ad": "Dinamik Tipografi",
+          "aciklama": "Arayüz için (Inter, Lato, Poppins) ve Kuran metni için (Amiri, Lateef, Cairo, Uthmanic) ayrı font seçimi. Küçük/orta/büyük/çok büyük boyut.",
+          "teknik": "FontModal: APP_FONTS grupları (sans/serif/arabic/special) sekme tabanlı, FontContext (SecureStore), ARABIC_PRIORITY_LANGS",
+          "gorsel_url": null
+        },
+        {
+          "id": "ayar_bildirim",
+          "ad": "Günlük Hatırlatıcılar",
+          "aciklama": "Kullanıcının belirlediği saat ve dakikada bildirim için özel saat seçici tekerlek. İzin öncesi fayda anlatan onboarding ekranı.",
+          "teknik": "Push Notification, saat seçici",
+          "gorsel_url": null
+        },
+        {
+          "id": "ayar_hep_yesil",
+          "ad": "Ağaç Solmasını Kapatma (Her Zaman Yeşil)",
+          "aciklama": "Ana ekrandaki ağacın kurumasını durduran seçenek.",
+          "teknik": "SecureStore flag",
+          "gorsel_url": null
+        },
+        {
+          "id": "ayar_dil",
+          "ad": "9 Dil Desteği + RTL",
+          "aciklama": "Türkçe, Arapça, İngilizce, Urduca, Endonezce, Farsça, Malayca, Fransızca, Almanca. Arapça/Urduca/Farsça seçilince arayüz otomatik RTL düzenine geçer.",
+          "teknik": "LocaleContext, RTL_LANGS: ar/ur/fa, flexDirection reverse, expo-localization",
+          "gorsel_url": null
+        },
+        {
+          "id": "ayar_navbar_tema",
+          "ad": "Tek Tıkla Tema Değiştirici (Navbar)",
+          "aciklama": "Üst barda gece/gündüz modu arasında anında geçiş. Genişletilmiş dokunma alanı (hitSlop).",
+          "teknik": "hitSlop ile büyütülmüş dokunma alanı",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "navbar": {
+      "baslik": "Dinamik Navbar",
+      "ozellikler": [
+        {
+          "id": "navbar_dinamik",
+          "ad": "Akıllı Bağlam İkonları",
+          "aciklama": "Kullanıcının bulunduğu sayfaya göre otomatik değişen başlık ve ikonlar (Kuran, Ezber, İstatistik vb.).",
+          "teknik": "EzberNavStore, MushafNavStore, QuranNavStore",
+          "gorsel_url": null
+        },
+        {
+          "id": "navbar_surah_info",
+          "ad": "Aktif Sure Adı ve Ayet Numarası",
+          "aciklama": "Kuran, Hatim ve Mushaf ekranlarında mevcut sure ve ayet bilgisinin dinamik gösterimi.",
+          "teknik": "Zustand nav store abonelikleri",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "floating_bot": {
+      "baslik": "Floating Bot (FloatingBot)",
+      "ozellikler": [
+        {
+          "id": "bot_sesli_nav",
+          "ad": "Sesli Navigasyon",
+          "aciklama": "Sesli komutla ekranlar arası geçiş yapabilme.",
+          "teknik": "expo-speech TTS, rapid-fire router.push guard, stale closure fix via refs",
+          "gorsel_url": null
+        },
+        {
+          "id": "bot_tts",
+          "ad": "Text-to-Speech Yanıtlar",
+          "aciklama": "Bot yanıtlarını sesli okuma.",
+          "teknik": "expo-speech TTS entegrasyonu",
+          "gorsel_url": null
+        },
+        {
+          "id": "bot_cok_dil",
+          "ad": "Çok Dil Desteği",
+          "aciklama": "LANG_ALIASES resolver ile farklı dillerde bot kullanımı.",
+          "teknik": "LANG_ALIASES çözümleyici, bot.ts / bot.json",
+          "gorsel_url": null
+        },
+        {
+          "id": "bot_ayarlar",
+          "ad": "Ayarlar Kapsama",
+          "aciklama": "FloatingBot üzerinden tüm ayar düğümlerine (ayarlarNodes.ts) erişim.",
+          "teknik": "ayarlarNodes.ts node haritası",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "tekvid_okuyucu": {
+      "baslik": "Tecvid Okuyucu (TecvidReaderScreen)",
+      "ozellikler": [
+        {
+          "id": "tecvid_split",
+          "ad": "Split-Panel Okuyucu",
+          "aciklama": "Tecvid kurallarını gösteren iki panelli temiz okuma arayüzü. Swipe ile sayfa geçişi.",
+          "teknik": "Bölünmüş panel layout",
+          "gorsel_url": null
+        },
+        {
+          "id": "tecvid_kelime_marker",
+          "ad": "Kelime Bazlı İşaretleme / Vurgulama",
+          "aciklama": "Uzun basışla kelime işaretleme ve kalıcı saklama.",
+          "teknik": "WordRenderer, long-press, SecureStore persistence",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "harf_detay": {
+      "baslik": "Arapça Harf Detay (HarfDetay / [harf].tsx)",
+      "ozellikler": [
+        {
+          "id": "harf_ses",
+          "ad": "Hücre Bazlı Ses Oynatma",
+          "aciklama": "Her harf hücresine dokunarak o harfin telaffuzunu dinleme.",
+          "teknik": "PlayBar bileşeni, sesNo tabanlı ses yapısı",
+          "gorsel_url": null
+        },
+        {
+          "id": "harf_grid",
+          "ad": "Dinamik Satır Gruplama",
+          "aciklama": "Harfleri kategoriye göre gruplayan ArabicGridSes bileşeni.",
+          "teknik": "ArabicGridSes, dinamik row grouping",
+          "gorsel_url": null
+        }
+      ]
+    },
+    "genel_ux": {
+      "baslik": "Genel UX ve Mikro-Etkileşimler",
+      "ozellikler": [
+        {
+          "id": "ux_glass_card",
+          "ad": "Glassmorphism Kartlar",
+          "aciklama": "Yarı saydam, hafif kenarlıklı, tutarlı GlassCard bileşeni.",
+          "teknik": "GlassCard component",
+          "gorsel_url": null
+        },
+        {
+          "id": "ux_responsive",
+          "ad": "Tam Responsive Tasarım",
+          "aciklama": "360px–800px arası tüm ekran genişliklerini ve tablet layoutlarını destekleyen adaptif sistem.",
+          "teknik": "useSimulatedDimensions() temel hook, ekran başına özel responsive hook'lar",
+          "gorsel_url": null
+        },
+        {
+          "id": "ux_simülator",
+          "ad": "30+ Android Cihaz Simülatörü",
+          "aciklama": "Geliştirme ortamında Samsung, Xiaomi, Google Pixel, Tablet profillerini fiziksel cihaz olmadan simüle etme.",
+          "teknik": "PhoneSimulatorContext, 30+ DeviceProfile: id/name/brand/width/height/cornerRadius/cutoutType/pixelRatio",
+          "gorsel_url": null
+        },
+        {
+          "id": "ux_renk_alg",
+          "ad": "Renk Kodlu Öğrenme Fazları",
+          "aciklama": "Ezber taktiğine göre eylemlerin renklerle ayrılması (Bakarak Oku → Mavi, Ezberden Söyle → Yeşil).",
+          "teknik": "Algoritma.ts renk tanımları",
+          "gorsel_url": null
+        },
+        {
+          "id": "ux_motivasyon_ton",
+          "ad": "Motive Edici Mikro-Metinler",
+          "aciklama": "'🔥 Devam Et!', 'Ders ertelendi — yarın hatırlatırız 🌿' gibi suçlamayan, destekleyici bildirim metinleri.",
+          "teknik": "locales/tr.ts TranslationKeys",
+          "gorsel_url": null
+        },
+        {
+          "id": "ux_privacy",
+          "ad": "Tam Yerel (Privacy-First) Mimari",
+          "aciklama": "Tüm kullanıcı verileri cihazda saklanır, hiçbir sunucuya gönderilmez. GDPR/KVKK uyumlu.",
+          "teknik": "expo-secure-store (iOS Keychain/Android Keystore), expo-sqlite, AsyncStorage, expo-file-system. Kaldırılan: supabase, firebase, axios",
+          "gorsel_url": null
+        }
+      ]
+    }
+  },
+  "istatistikler": {
+    "desteklenen_dil": 9,
+    "ezber_metod_sayisi": 10,
+    "mushaf_sayfa": 604,
+    "quiz_mod": 4,
+    "simulasyon_cihaz": 30,
+    "cuz_sayisi": 30,
+    "max_concurrent_indirme": 4,
+    "oynatma_hizi_secenekleri": [
+      "0.25x",
+      "0.5x",
+      "1x",
+      "1.25x",
+      "1.5x",
+      "2x"
+    ],
+    "tekrar_secenekleri": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      10,
+      "∞"
+    ]
+  }
+}

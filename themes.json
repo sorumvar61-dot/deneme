@@ -1,0 +1,3895 @@
+[
+  {
+    "label": "Mavi & Turuncu",
+    "desc": "Sorun → Çözüm",
+    "c1": "#1E3A8A",
+    "c2": "#F97316",
+    "slides": [
+      {
+        "bg": "#0F172A",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "layout": "to_grow_online",
+        "decoColor": "#F97316",
+        "decoOpacity": 100,
+        "accent1": "#ffffff",
+        "accent2": "#F97316",
+        "duration": 2.2,
+        "align": "middle",
+        "lineHeight": 1,
+        "textPadding": 100,
+        "lines": [
+          {
+            "text": "NEREYE",
+            "color": "#ffffff",
+            "size": 150
+          },
+          {
+            "text": "YAZMIŞTIM",
+            "color": "#ffffff",
+            "size": 120
+          },
+          {
+            "text": "?",
+            "color": "#F97316",
+            "size": 330
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Anton",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 0.9,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HEPİMİZ",
+            "color": "#ffffff",
+            "size": 180
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Anton",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "YAŞADIK.",
+            "color": "#F97316",
+            "size": 190
+          }
+        ]
+      },
+      {
+        "bg": "#1E293B",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BİR TOPLANTI",
+            "color": "#ffffff",
+            "size": 90
+          },
+          {
+            "text": "BİR FİKİR",
+            "color": "#F97316",
+            "size": 90
+          },
+          {
+            "text": "SONRA YOK OLDU.",
+            "color": "#ffffff",
+            "size": 78
+          }
+        ]
+      },
+      {
+        "bg": "#1E293B",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HER KAYIP FİKİR,",
+            "color": "#ffffff",
+            "size": 82
+          },
+          {
+            "text": "KAYIP BİR FIRSATTIR.",
+            "color": "#F97316",
+            "size": 82
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ÇÖZÜM:",
+            "color": "#ffffff",
+            "size": 170
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Oswald",
+        "textAnim": "slide_up",
+        "deco": "circles",
+        "decoColor": "#F97316",
+        "decoOpacity": 10,
+        "duration": 1.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "TEK DOKUNUŞ,",
+            "color": "#ffffff",
+            "size": 96
+          },
+          {
+            "text": "KALICI HAFIZA.",
+            "color": "#F97316",
+            "size": 96
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Oswald",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "AI SENİN İÇİN",
+            "color": "#ffffff",
+            "size": 88
+          },
+          {
+            "text": "DÜZENLER.",
+            "color": "#F97316",
+            "size": 88
+          }
+        ]
+      },
+      {
+        "bg": "#0F172A",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "dots",
+        "decoColor": "#F97316",
+        "decoOpacity": 12,
+        "duration": 1.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "10.000+ KİŞİ",
+            "color": "#F97316",
+            "size": 96
+          },
+          {
+            "text": "ARTIK UNUTMUYOR.",
+            "color": "#ffffff",
+            "size": 86
+          }
+        ]
+      },
+      {
+        "bg": "#1E293B",
+        "font": "Oswald",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SEN DE",
+            "color": "#ffffff",
+            "size": 120
+          },
+          {
+            "text": "KATIL.",
+            "color": "#F97316",
+            "size": 150
+          }
+        ]
+      },
+      {
+        "bg": "#F97316",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 2.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "İNDİR.",
+            "color": "#0F172A",
+            "size": 170,
+            "underline": true
+          }
+        ]
+      }
+    ],
+    "category": "problem_solution"
+  },
+  {
+    "label": "Bordo & Krem",
+    "desc": "Merak → Çözüm",
+    "c1": "#7F1D1D",
+    "c2": "#FEF3C7",
+    "slides": [
+      {
+        "bg": "#7F1D1D",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "O FİKİR",
+            "color": "#ffffff",
+            "size": 130
+          }
+        ]
+      },
+      {
+        "bg": "#7F1D1D",
+        "font": "Oswald",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1.2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "NEREYE",
+            "color": "#FEF3C7",
+            "size": 120
+          }
+        ]
+      },
+      {
+        "bg": "#7F1D1D",
+        "font": "Oswald",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1.1,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "GİTTİ?",
+            "color": "#ffffff",
+            "size": 180
+          }
+        ]
+      },
+      {
+        "bg": "#450a0a",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ORTALAMA İNSAN",
+            "color": "#FEF3C7",
+            "size": 80
+          },
+          {
+            "text": "GÜNDE 3 FİKRİ",
+            "color": "#ffffff",
+            "size": 80
+          },
+          {
+            "text": "UNUTUYOR.",
+            "color": "#FEF3C7",
+            "size": 80
+          }
+        ]
+      },
+      {
+        "bg": "#450a0a",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BUNLARDAN BİRİ",
+            "color": "#ffffff",
+            "size": 84
+          },
+          {
+            "text": "HAYATINI DEĞİŞTİREBİLİRDİ.",
+            "color": "#FEF3C7",
+            "size": 66
+          }
+        ]
+      },
+      {
+        "bg": "#7F1D1D",
+        "font": "Oswald",
+        "textAnim": "skew_pop",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ARTIK KAYBOLMASIN.",
+            "color": "#FEF3C7",
+            "size": 94
+          }
+        ]
+      },
+      {
+        "bg": "#7F1D1D",
+        "font": "Oswald",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SES, YAZI, FOTOĞRAF",
+            "color": "#FEF3C7",
+            "size": 72
+          },
+          {
+            "text": "HEPSİ TEK NOTTA.",
+            "color": "#ffffff",
+            "size": 80
+          }
+        ]
+      },
+      {
+        "bg": "#450a0a",
+        "font": "Oswald",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SANİYELER İÇİNDE",
+            "color": "#ffffff",
+            "size": 82
+          },
+          {
+            "text": "BULURSUN.",
+            "color": "#FEF3C7",
+            "size": 98
+          }
+        ]
+      },
+      {
+        "bg": "#7F1D1D",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BİNLERCE KULLANICI",
+            "color": "#FEF3C7",
+            "size": 78
+          },
+          {
+            "text": "GÜVENİYOR.",
+            "color": "#ffffff",
+            "size": 96
+          }
+        ]
+      },
+      {
+        "bg": "#450a0a",
+        "font": "Oswald",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SEN DE",
+            "color": "#ffffff",
+            "size": 110
+          },
+          {
+            "text": "GÜVEN.",
+            "color": "#FEF3C7",
+            "size": 140
+          }
+        ]
+      },
+      {
+        "bg": "#FEF3C7",
+        "font": "Oswald",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 2.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HEMEN NOT AL.",
+            "color": "#450a0a",
+            "size": 120
+          }
+        ]
+      }
+    ],
+    "category": "curiosity"
+  },
+  {
+    "label": "Mürdüm & Limon",
+    "desc": "Sorun → Çözüm",
+    "category": "problem_solution",
+    "c1": "#3B0764",
+    "c2": "#BEF264",
+    "slides": [
+      {
+        "bg": "#3B0764",
+        "font": "Rubik",
+        "textAnim": "fade",
+        "deco": "asterisk",
+        "decoColor": "#BEF264",
+        "decoOpacity": 14,
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ZİHNİN",
+            "color": "#F5F3FF",
+            "size": 120
+          }
+        ]
+      },
+      {
+        "bg": "#3B0764",
+        "font": "Rubik",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1.2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HEP AÇIK MI?",
+            "color": "#BEF264",
+            "size": 110
+          }
+        ]
+      },
+      {
+        "bg": "#2A0553",
+        "font": "Rubik",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "100 SEKME.",
+            "color": "#F5F3FF",
+            "size": 100
+          },
+          {
+            "text": "TEK ODAK YOK.",
+            "color": "#BEF264",
+            "size": 90
+          }
+        ]
+      },
+      {
+        "bg": "#2A0553",
+        "font": "Rubik",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BEYNİN SÜREKLİ",
+            "color": "#F5F3FF",
+            "size": 86
+          },
+          {
+            "text": "YARIM KALIYOR.",
+            "color": "#BEF264",
+            "size": 86
+          }
+        ]
+      },
+      {
+        "bg": "#3B0764",
+        "font": "Rubik",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.1,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DUR.",
+            "color": "#F5F3FF",
+            "size": 180
+          }
+        ]
+      },
+      {
+        "bg": "#3B0764",
+        "font": "Rubik",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "TEK TIKLA",
+            "color": "#F5F3FF",
+            "size": 96
+          },
+          {
+            "text": "HEPSİNİ TOPLA.",
+            "color": "#BEF264",
+            "size": 96
+          }
+        ]
+      },
+      {
+        "bg": "#2A0553",
+        "font": "Rubik",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DAĞINIKLIK YOK.",
+            "color": "#BEF264",
+            "size": 100
+          },
+          {
+            "text": "SADECE AKIŞ.",
+            "color": "#F5F3FF",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#3B0764",
+        "font": "Rubik",
+        "textAnim": "fade",
+        "deco": "asterisk",
+        "decoColor": "#BEF264",
+        "decoOpacity": 12,
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "50.000 KİŞİ",
+            "color": "#BEF264",
+            "size": 96
+          },
+          {
+            "text": "ZİHNİNİ BOŞALTTI.",
+            "color": "#F5F3FF",
+            "size": 80
+          }
+        ]
+      },
+      {
+        "bg": "#2A0553",
+        "font": "Rubik",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SEN DE DENE.",
+            "color": "#F5F3FF",
+            "size": 110
+          }
+        ]
+      },
+      {
+        "bg": "#BEF264",
+        "font": "Rubik",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 2.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ŞİMDİ BAŞLA.",
+            "color": "#3B0764",
+            "size": 130,
+            "underline": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Toprak & Doğa",
+    "desc": "Merak → Çözüm",
+    "c1": "#E5E7EB",
+    "c2": "#059669",
+    "slides": [
+      {
+        "bg": "#E5E7EB",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.9,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "YAVAŞ",
+            "color": "#10B981",
+            "size": 140
+          }
+        ]
+      },
+      {
+        "bg": "#E5E7EB",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "AMA",
+            "color": "#111827",
+            "size": 180
+          }
+        ]
+      },
+      {
+        "bg": "#D1D5DB",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.9,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "KALICI.",
+            "color": "#064E3B",
+            "size": 160
+          }
+        ]
+      },
+      {
+        "bg": "#D1D5DB",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "ÇOĞU UYGULAMA",
+            "color": "#111827",
+            "size": 76
+          },
+          {
+            "text": "HIZLI VAAT EDER,",
+            "color": "#059669",
+            "size": 76
+          },
+          {
+            "text": "ÇABUK UNUTTURUR.",
+            "color": "#111827",
+            "size": 76
+          }
+        ]
+      },
+      {
+        "bg": "#E5E7EB",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "GERÇEK ÖĞRENME",
+            "color": "#111827",
+            "size": 80
+          },
+          {
+            "text": "ZAMAN İSTER.",
+            "color": "#059669",
+            "size": 96
+          }
+        ]
+      },
+      {
+        "bg": "#D1D5DB",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "HER GÜN BİRAZ.",
+            "color": "#059669",
+            "size": 96
+          }
+        ]
+      },
+      {
+        "bg": "#E5E7EB",
+        "font": "Poppins",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.7,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "ARALIKLI TEKRAR",
+            "color": "#111827",
+            "size": 76
+          },
+          {
+            "text": "BİLİMSEL OLARAK KANITLI.",
+            "color": "#059669",
+            "size": 60
+          }
+        ]
+      },
+      {
+        "bg": "#D1D5DB",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "DOĞRU ZAMANDA",
+            "color": "#111827",
+            "size": 80
+          },
+          {
+            "text": "DOĞRU HATIRLATMA.",
+            "color": "#059669",
+            "size": 76
+          }
+        ]
+      },
+      {
+        "bg": "#E5E7EB",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "BİNLERCE ÖĞRENCİ",
+            "color": "#111827",
+            "size": 76
+          },
+          {
+            "text": "BÖYLE BAŞARDI.",
+            "color": "#059669",
+            "size": 88
+          }
+        ]
+      },
+      {
+        "bg": "#D1D5DB",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "SEN DE BAŞLA.",
+            "color": "#064E3B",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#E5E7EB",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "HAFIZLIK.",
+            "color": "#047857",
+            "size": 130
+          }
+        ]
+      }
+    ],
+    "category": "curiosity"
+  },
+  {
+    "label": "Sarı Enerji",
+    "desc": "Sorun → Çözüm",
+    "c1": "#FBBF24",
+    "c2": "#4C1D95",
+    "slides": [
+      {
+        "bg": "#FBBF24",
+        "font": "Anton",
+        "textAnim": "pop_side",
+        "deco": "none",
+        "duration": 0.8,
+        "align": "diagonal_tl",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DUR.",
+            "color": "#111827",
+            "size": 180
+          }
+        ]
+      },
+      {
+        "bg": "#4C1D95",
+        "font": "Anton",
+        "textAnim": "drop_bounce",
+        "deco": "none",
+        "duration": 0.8,
+        "align": "diagonal_br",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "YARIN",
+            "color": "#FBBF24",
+            "size": 190
+          }
+        ]
+      },
+      {
+        "bg": "#FBBF24",
+        "font": "Anton",
+        "textAnim": "pop_side",
+        "deco": "none",
+        "duration": 0.9,
+        "align": "diagonal_tl",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DEMEK",
+            "color": "#111827",
+            "size": 190
+          }
+        ]
+      },
+      {
+        "bg": "#4C1D95",
+        "font": "Anton",
+        "textAnim": "drop_bounce",
+        "deco": "none",
+        "duration": 1,
+        "align": "diagonal_br",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "YOK.",
+            "color": "#FBBF24",
+            "size": 200
+          }
+        ]
+      },
+      {
+        "bg": "#111827",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HERKES \"YARIN\" DER.",
+            "color": "#ffffff",
+            "size": 80
+          },
+          {
+            "text": "HİÇBİRİ BAŞLAMAZ.",
+            "color": "#FBBF24",
+            "size": 80
+          }
+        ]
+      },
+      {
+        "bg": "#4C1D95",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ÇÖZÜM:",
+            "color": "#FBBF24",
+            "size": 150
+          }
+        ]
+      },
+      {
+        "bg": "#4C1D95",
+        "font": "Oswald",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "30 SANİYEDE",
+            "color": "#FBBF24",
+            "size": 90
+          },
+          {
+            "text": "İLK NOTUNU AL.",
+            "color": "#ffffff",
+            "size": 90
+          }
+        ]
+      },
+      {
+        "bg": "#FBBF24",
+        "font": "Oswald",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "KURULUM YOK,",
+            "color": "#111827",
+            "size": 88
+          },
+          {
+            "text": "BAHANE YOK.",
+            "color": "#4C1D95",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#4C1D95",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BİNLERCE KİŞİ",
+            "color": "#FBBF24",
+            "size": 84
+          },
+          {
+            "text": "ERTELEMEYİ BIRAKTI.",
+            "color": "#ffffff",
+            "size": 70
+          }
+        ]
+      },
+      {
+        "bg": "#111827",
+        "font": "Oswald",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SEN DE BIRAK.",
+            "color": "#FBBF24",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#FBBF24",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 2.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ŞİMDİ",
+            "color": "#4C1D95",
+            "size": 96
+          },
+          {
+            "text": "BAŞLA.",
+            "color": "#4C1D95",
+            "size": 140
+          }
+        ]
+      }
+    ],
+    "category": "problem_solution"
+  },
+  {
+    "label": "Turuncu & Mavi",
+    "desc": "Sorun → Çözüm",
+    "c1": "#F97316",
+    "c2": "#1E3A8A",
+    "slides": [
+      {
+        "bg": "#F97316",
+        "font": "Anton",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 0.8,
+        "align": "left",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DUR.",
+            "color": "#1E3A8A",
+            "size": 180
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Anton",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 0.8,
+        "align": "right",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "YARIN",
+            "color": "#F97316",
+            "size": 190
+          }
+        ]
+      },
+      {
+        "bg": "#F97316",
+        "font": "Anton",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 0.9,
+        "align": "left",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DEMEK",
+            "color": "#1E3A8A",
+            "size": 190
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Anton",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1,
+        "align": "right",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "YOK.",
+            "color": "#F97316",
+            "size": 200
+          }
+        ]
+      },
+      {
+        "bg": "#111827",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "top",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HERKES \"YARIN\" DER.",
+            "color": "#ffffff",
+            "size": 80
+          },
+          {
+            "text": "HİÇBİRİ BAŞLAMAZ.",
+            "color": "#F97316",
+            "size": 80
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Anton",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ÇÖZÜM:",
+            "color": "#F97316",
+            "size": 150
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Oswald",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "top",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "30 SANİYEDE",
+            "color": "#F97316",
+            "size": 90
+          },
+          {
+            "text": "İLK NOTUNU AL.",
+            "color": "#ffffff",
+            "size": 90
+          }
+        ]
+      },
+      {
+        "bg": "#F97316",
+        "font": "Oswald",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "left",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "KURULUM YOK,",
+            "color": "#1E3A8A",
+            "size": 88
+          },
+          {
+            "text": "BAHANE YOK.",
+            "color": "#ffffff",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "top",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BİNLERCE KİŞİ",
+            "color": "#F97316",
+            "size": 84
+          },
+          {
+            "text": "ERTELEMEYİ BIRAKTI.",
+            "color": "#ffffff",
+            "size": 70
+          }
+        ]
+      },
+      {
+        "bg": "#111827",
+        "font": "Oswald",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SEN DE BIRAK.",
+            "color": "#F97316",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#F97316",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 2.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ŞİMDİ",
+            "color": "#1E3A8A",
+            "size": 96
+          },
+          {
+            "text": "BAŞLA.",
+            "color": "#1E3A8A",
+            "size": 140
+          }
+        ]
+      }
+    ],
+    "category": "problem_solution"
+  },
+  {
+    "label": "Neon Pembe & Siyah",
+    "desc": "Sorun → Çözüm",
+    "c1": "#F0ABFC",
+    "c2": "#0F0F0F",
+    "slides": [
+      {
+        "bg": "#F0ABFC",
+        "font": "Anton",
+        "textAnim": "rotate_in",
+        "deco": "none",
+        "duration": 0.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DUR.",
+            "color": "#0F0F0F",
+            "size": 180
+          }
+        ]
+      },
+      {
+        "bg": "#0F0F0F",
+        "font": "Anton",
+        "textAnim": "skew_pop",
+        "deco": "none",
+        "duration": 0.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "YARIN",
+            "color": "#F0ABFC",
+            "size": 190
+          }
+        ]
+      },
+      {
+        "bg": "#F0ABFC",
+        "font": "Anton",
+        "textAnim": "rotate_in",
+        "deco": "none",
+        "duration": 0.9,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DEMEK",
+            "color": "#0F0F0F",
+            "size": 190
+          }
+        ]
+      },
+      {
+        "bg": "#0F0F0F",
+        "font": "Anton",
+        "textAnim": "skew_pop",
+        "deco": "none",
+        "duration": 1,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "YOK.",
+            "color": "#F0ABFC",
+            "size": 200
+          }
+        ]
+      },
+      {
+        "bg": "#1F1F1F",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "left",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HERKES \"YARIN\" DER.",
+            "color": "#ffffff",
+            "size": 80
+          },
+          {
+            "text": "HİÇBİRİ BAŞLAMAZ.",
+            "color": "#F0ABFC",
+            "size": 80
+          }
+        ]
+      },
+      {
+        "bg": "#0F0F0F",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ÇÖZÜM:",
+            "color": "#F0ABFC",
+            "size": 150
+          }
+        ]
+      },
+      {
+        "bg": "#0F0F0F",
+        "font": "Oswald",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "left",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "30 SANİYEDE",
+            "color": "#F0ABFC",
+            "size": 90
+          },
+          {
+            "text": "İLK NOTUNU AL.",
+            "color": "#ffffff",
+            "size": 90
+          }
+        ]
+      },
+      {
+        "bg": "#F0ABFC",
+        "font": "Oswald",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "right",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "KURULUM YOK,",
+            "color": "#0F0F0F",
+            "size": 88
+          },
+          {
+            "text": "BAHANE YOK.",
+            "color": "#3B0764",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#0F0F0F",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "left",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BİNLERCE KİŞİ",
+            "color": "#F0ABFC",
+            "size": 84
+          },
+          {
+            "text": "ERTELEMEYİ BIRAKTI.",
+            "color": "#ffffff",
+            "size": 70
+          }
+        ]
+      },
+      {
+        "bg": "#1F1F1F",
+        "font": "Oswald",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SEN DE BIRAK.",
+            "color": "#F0ABFC",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#F0ABFC",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 2.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ŞİMDİ",
+            "color": "#0F0F0F",
+            "size": 96
+          },
+          {
+            "text": "BAŞLA.",
+            "color": "#0F0F0F",
+            "size": 140
+          }
+        ]
+      }
+    ],
+    "category": "problem_solution"
+  },
+  {
+    "label": "Pembe/Kırmızı",
+    "desc": "Merak → Çözüm",
+    "c1": "#f9d2d9",
+    "c2": "#ff0000",
+    "slides": [
+      {
+        "bg": "#f9d2d9",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "dots_corner",
+        "decoColor": "#ffffff",
+        "decoOpacity": 80,
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "MERHABA!",
+            "color": "#ff0000",
+            "size": 150
+          }
+        ]
+      },
+      {
+        "bg": "#f9d2d9",
+        "font": "Anton",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SEN DE",
+            "color": "#ff0000",
+            "size": 170
+          }
+        ]
+      },
+      {
+        "bg": "#f9d2d9",
+        "font": "Anton",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HİÇ UNUTMADIN MI?",
+            "color": "#ff0000",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#f9d2d9",
+        "font": "Anton",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DOĞUM GÜNÜ.",
+            "color": "#ff0000",
+            "size": 110
+          },
+          {
+            "text": "RANDEVU.",
+            "color": "#ff0000",
+            "size": 110
+          },
+          {
+            "text": "SÖZ VERDİĞİN ŞEY.",
+            "color": "#ff0000",
+            "size": 80
+          }
+        ]
+      },
+      {
+        "bg": "#f9d2d9",
+        "font": "Anton",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HEPSİ AKLINDAN",
+            "color": "#ff0000",
+            "size": 82
+          },
+          {
+            "text": "UÇUP GİTTİ.",
+            "color": "#ff0000",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#f9d2d9",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BUNU DEĞİŞTİR.",
+            "color": "#ff0000",
+            "size": 110
+          }
+        ]
+      },
+      {
+        "bg": "#f9d2d9",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "TEK DOKUNUŞLA",
+            "color": "#ff0000",
+            "size": 88
+          },
+          {
+            "text": "HER ŞEYİ KAYDET.",
+            "color": "#ff0000",
+            "size": 88
+          }
+        ]
+      },
+      {
+        "bg": "#f9d2d9",
+        "font": "Anton",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HATIRLATMALAR",
+            "color": "#ff0000",
+            "size": 84
+          },
+          {
+            "text": "SENİN İÇİN ÇALIŞIR.",
+            "color": "#ff0000",
+            "size": 76
+          }
+        ]
+      },
+      {
+        "bg": "#f9d2d9",
+        "font": "Anton",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1.2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BİNLERCE KİŞİ",
+            "color": "#ff0000",
+            "size": 96
+          },
+          {
+            "text": "ARTIK UNUTMUYOR.",
+            "color": "#ff0000",
+            "size": 80
+          }
+        ]
+      },
+      {
+        "bg": "#f9d2d9",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "YARINA BIRAKMA.",
+            "color": "#ff0000",
+            "size": 96
+          }
+        ]
+      },
+      {
+        "bg": "#f9d2d9",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "dots_corner",
+        "decoColor": "#ffffff",
+        "decoOpacity": 80,
+        "duration": 3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BUGÜN",
+            "color": "#ff0000",
+            "size": 140
+          },
+          {
+            "text": "BAŞLA.",
+            "color": "#ff0000",
+            "size": 170
+          }
+        ]
+      }
+    ],
+    "category": "curiosity"
+  },
+  {
+    "label": "Krem/Zümrüt",
+    "desc": "Liste Formatı — Sorun→Çözüm",
+    "c1": "#f5efe6",
+    "c2": "#065f46",
+    "slides": [
+      {
+        "bg": "#f5efe6",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "3 SEBEP",
+            "color": "#1c1917",
+            "size": 150
+          }
+        ]
+      },
+      {
+        "bg": "#f5efe6",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "NEDEN BUGÜN",
+            "color": "#065f46",
+            "size": 130
+          }
+        ]
+      },
+      {
+        "bg": "#f5efe6",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "İNDİRMELİSİN?",
+            "color": "#1c1917",
+            "size": 106
+          }
+        ]
+      },
+      {
+        "bg": "#f5efe6",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "01",
+            "color": "#f5efe6",
+            "size": 84,
+            "box": "#065f46"
+          },
+          {
+            "text": "UNUTMA",
+            "color": "#1c1917",
+            "size": 130
+          }
+        ]
+      },
+      {
+        "bg": "#f5efe6",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "02",
+            "color": "#f5efe6",
+            "size": 84,
+            "box": "#065f46"
+          },
+          {
+            "text": "TEKRAR ET",
+            "color": "#1c1917",
+            "size": 110
+          }
+        ]
+      },
+      {
+        "bg": "#f5efe6",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "03",
+            "color": "#f5efe6",
+            "size": 84,
+            "box": "#065f46"
+          },
+          {
+            "text": "KALICI ÖĞREN",
+            "color": "#1c1917",
+            "size": 94
+          }
+        ]
+      },
+      {
+        "bg": "#f5efe6",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "HEPSİ TEK",
+            "color": "#065f46",
+            "size": 90
+          },
+          {
+            "text": "UYGULAMADA.",
+            "color": "#1c1917",
+            "size": 90
+          }
+        ]
+      },
+      {
+        "bg": "#f5efe6",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "ARADIĞIN HER ŞEY",
+            "color": "#1c1917",
+            "size": 76
+          },
+          {
+            "text": "BİR DOKUNUŞ UZAKTA.",
+            "color": "#065f46",
+            "size": 70
+          }
+        ]
+      },
+      {
+        "bg": "#f5efe6",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "SADECE",
+            "color": "#1c1917",
+            "size": 170
+          }
+        ]
+      },
+      {
+        "bg": "#f5efe6",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "İNDİRMEN GEREK.",
+            "color": "#065f46",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#f5efe6",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "halftone",
+        "decoColor": "#065f46",
+        "decoOpacity": 8,
+        "duration": 3.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "HEMEN",
+            "color": "#1c1917",
+            "size": 140
+          },
+          {
+            "text": "İNDİR →",
+            "color": "#065f46",
+            "size": 170
+          }
+        ]
+      }
+    ],
+    "category": "list"
+  },
+  {
+    "label": "Siber Kırmızı",
+    "desc": "Sorun → Çözüm",
+    "c1": "#171717",
+    "c2": "#F43F5E",
+    "slides": [
+      {
+        "bg": "#171717",
+        "font": "Anton",
+        "textAnim": "skew_pop",
+        "deco": "none",
+        "duration": 0.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DUR.",
+            "color": "#F43F5E",
+            "size": 200
+          }
+        ]
+      },
+      {
+        "bg": "#171717",
+        "font": "Anton",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 0.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BUNU",
+            "color": "#ffffff",
+            "size": 180
+          }
+        ]
+      },
+      {
+        "bg": "#171717",
+        "font": "Anton",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 0.7,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "İZLE.",
+            "color": "#F43F5E",
+            "size": 190
+          }
+        ]
+      },
+      {
+        "bg": "#F43F5E",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ÇOĞU İNSAN",
+            "color": "#171717",
+            "size": 120
+          }
+        ]
+      },
+      {
+        "bg": "#171717",
+        "font": "Anton",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HALA UNUTUYOR.",
+            "color": "#ffffff",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#171717",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "AYNI HATAYI",
+            "color": "#F43F5E",
+            "size": 88
+          },
+          {
+            "text": "TEKRAR EDİYORLAR.",
+            "color": "#ffffff",
+            "size": 76
+          }
+        ]
+      },
+      {
+        "bg": "#F43F5E",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SEN FARKLI OL.",
+            "color": "#171717",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#171717",
+        "font": "Oswald",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "AI DESTEKLİ",
+            "color": "#F43F5E",
+            "size": 90
+          },
+          {
+            "text": "AKILLI HATIRLATMA.",
+            "color": "#ffffff",
+            "size": 78
+          }
+        ]
+      },
+      {
+        "bg": "#171717",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "GÜVENİLİR VERİLERLE",
+            "color": "#ffffff",
+            "size": 76
+          },
+          {
+            "text": "KANITLANDI.",
+            "color": "#F43F5E",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#F43F5E",
+        "font": "Anton",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ARADAKİ FARK SENSİN.",
+            "color": "#171717",
+            "size": 82
+          }
+        ]
+      },
+      {
+        "bg": "#171717",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 2.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SEN",
+            "color": "#F43F5E",
+            "size": 150
+          },
+          {
+            "text": "HATIRLA.",
+            "color": "#ffffff",
+            "size": 120
+          }
+        ]
+      }
+    ],
+    "category": "problem_solution"
+  },
+  {
+    "label": "Lavanta & Nane",
+    "desc": "Merak → Çözüm",
+    "c1": "#E9D5FF",
+    "c2": "#A7F3D0",
+    "slides": [
+      {
+        "bg": "#E9D5FF",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "küçük bir itiraf 👀",
+            "color": "#4C1D95",
+            "size": 72
+          }
+        ]
+      },
+      {
+        "bg": "#A7F3D0",
+        "font": "Poppins",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1.1,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "her şeyi",
+            "color": "#064E3B",
+            "size": 96
+          }
+        ]
+      },
+      {
+        "bg": "#A7F3D0",
+        "font": "Poppins",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1.1,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "aklımda",
+            "color": "#ffffff",
+            "size": 114
+          }
+        ]
+      },
+      {
+        "bg": "#A7F3D0",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "tutamıyorum.",
+            "color": "#064E3B",
+            "size": 88
+          }
+        ]
+      },
+      {
+        "bg": "#EDE9FE",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "sürekli \"hatırlarım\"",
+            "color": "#4C1D95",
+            "size": 64
+          },
+          {
+            "text": "dedim, hatırlamadım.",
+            "color": "#4C1D95",
+            "size": 64
+          }
+        ]
+      },
+      {
+        "bg": "#A7F3D0",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "sonunda bir şey",
+            "color": "#064E3B",
+            "size": 74
+          },
+          {
+            "text": "buldum.",
+            "color": "#ffffff",
+            "size": 96
+          }
+        ]
+      },
+      {
+        "bg": "#EDE9FE",
+        "font": "Poppins",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "yazıyorum,",
+            "color": "#4C1D95",
+            "size": 78
+          },
+          {
+            "text": "o hatırlıyor.",
+            "color": "#4C1D95",
+            "size": 78
+          }
+        ]
+      },
+      {
+        "bg": "#A7F3D0",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "nazikçe, doğru anda",
+            "color": "#064E3B",
+            "size": 64
+          },
+          {
+            "text": "hatırlatıyor.",
+            "color": "#ffffff",
+            "size": 88
+          }
+        ]
+      },
+      {
+        "bg": "#E9D5FF",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "binlerce kişi",
+            "color": "#4C1D95",
+            "size": 74
+          },
+          {
+            "text": "aynı şeyi hissetti.",
+            "color": "#4C1D95",
+            "size": 70
+          }
+        ]
+      },
+      {
+        "bg": "#A7F3D0",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "sen de",
+            "color": "#064E3B",
+            "size": 90
+          },
+          {
+            "text": "dene?",
+            "color": "#ffffff",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#EDE9FE",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 2.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "indir 🤍",
+            "color": "#4C1D95",
+            "size": 100
+          }
+        ]
+      }
+    ],
+    "category": "curiosity"
+  },
+  {
+    "label": "True Dark — Gece Modu",
+    "desc": "Sorun → Çözüm (Dark)",
+    "c1": "#000000",
+    "c2": "#39ff14",
+    "dark": true,
+    "slides": [
+      {
+        "bg": "#000000",
+        "font": "Montserrat",
+        "textAnim": "fade",
+        "deco": "dots",
+        "decoColor": "#39ff14",
+        "decoOpacity": 8,
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "GECE 2:14.",
+            "color": "#ffffff",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#000000",
+        "font": "Montserrat",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "AKLINA BİR ŞEY",
+            "color": "#ffffff",
+            "size": 78
+          },
+          {
+            "text": "GELDİ.",
+            "color": "#39ff14",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#0a0a0a",
+        "font": "Montserrat",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "SABAH OLDUĞUNDA",
+            "color": "#ffffff",
+            "size": 76
+          },
+          {
+            "text": "GİTMİŞ OLACAK.",
+            "color": "#39ff14",
+            "size": 88
+          }
+        ]
+      },
+      {
+        "bg": "#0a0a0a",
+        "font": "Montserrat",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "EN İYİ FİKİRLER",
+            "color": "#ffffff",
+            "size": 80
+          },
+          {
+            "text": "HEP YANLIŞ ZAMANDA GELİR.",
+            "color": "#39ff14",
+            "size": 58
+          }
+        ]
+      },
+      {
+        "bg": "#000000",
+        "font": "Montserrat",
+        "textAnim": "skew_pop",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "ARTIK ÖNEMLİ DEĞİL.",
+            "color": "#ffffff",
+            "size": 88
+          }
+        ]
+      },
+      {
+        "bg": "#000000",
+        "font": "Montserrat",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "KARANLIKTA BİLE",
+            "color": "#ffffff",
+            "size": 78
+          },
+          {
+            "text": "TEK DOKUNUŞ.",
+            "color": "#39ff14",
+            "size": 96
+          }
+        ]
+      },
+      {
+        "bg": "#0a0a0a",
+        "font": "Montserrat",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "GÖZ YORMAYAN",
+            "color": "#ffffff",
+            "size": 80
+          },
+          {
+            "text": "GECE MODU.",
+            "color": "#39ff14",
+            "size": 96
+          }
+        ]
+      },
+      {
+        "bg": "#000000",
+        "font": "Montserrat",
+        "textAnim": "fade",
+        "deco": "grid",
+        "decoColor": "#39ff14",
+        "decoOpacity": 6,
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "SESSİZ. HIZLI.",
+            "color": "#ffffff",
+            "size": 88
+          },
+          {
+            "text": "GÜVENİLİR.",
+            "color": "#39ff14",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#0a0a0a",
+        "font": "Montserrat",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "BİNLERCE GECE KUŞU",
+            "color": "#ffffff",
+            "size": 70
+          },
+          {
+            "text": "BUNU KULLANIYOR.",
+            "color": "#39ff14",
+            "size": 80
+          }
+        ]
+      },
+      {
+        "bg": "#000000",
+        "font": "Montserrat",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "BİR SONRAKİ FİKRİN",
+            "color": "#ffffff",
+            "size": 74
+          },
+          {
+            "text": "KAYBOLMASIN.",
+            "color": "#39ff14",
+            "size": 88
+          }
+        ]
+      },
+      {
+        "bg": "#000000",
+        "font": "Montserrat",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 3.2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 120,
+        "lines": [
+          {
+            "text": "HAFIZLIK.",
+            "color": "#39ff14",
+            "size": 130
+          }
+        ]
+      }
+    ],
+    "category": "problem_solution"
+  },
+  {
+    "label": "Sarı Enerji — Soru & Cevap",
+    "desc": "Soru → Bekle → Çözüm",
+    "c1": "#FFE600",
+    "c2": "#111111",
+    "slides": [
+      {
+        "bg": "#FFE600",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 3,
+        "align": "middle",
+        "lines": [
+          {
+            "text": "ERTELİYOR MUSUN?",
+            "color": "#111111",
+            "size": 130
+          },
+          {
+            "text": "ERTELİYOR MUSUN?",
+            "color": "#111111",
+            "size": 130
+          },
+          {
+            "text": "ERTELİYOR MUSUN?",
+            "color": "#111111",
+            "size": 130
+          },
+          {
+            "text": "ERTELİYOR MUSUN?",
+            "color": "#111111",
+            "size": 130
+          },
+          {
+            "text": "ERTELİYOR MUSUN?",
+            "color": "#111111",
+            "size": 130
+          }
+        ]
+      },
+      {
+        "bg": "#111111",
+        "font": "Anton",
+        "textAnim": "fade",
+        "deco": "dots",
+        "decoColor": "#FFE600",
+        "decoOpacity": 10,
+        "duration": 1.1,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "...",
+            "color": "#FFE600",
+            "size": 170
+          }
+        ]
+      },
+      {
+        "bg": "#111111",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ÇÜNKÜ NEREDEN",
+            "color": "#ffffff",
+            "size": 80
+          },
+          {
+            "text": "BAŞLAYACAĞINI",
+            "color": "#ffffff",
+            "size": 80
+          },
+          {
+            "text": "BİLMİYORSUN.",
+            "color": "#FFE600",
+            "size": 80
+          }
+        ]
+      },
+      {
+        "bg": "#FFE600",
+        "font": "Anton",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "CEVAP BASİT:",
+            "color": "#111111",
+            "size": 120
+          }
+        ]
+      },
+      {
+        "bg": "#111111",
+        "font": "Oswald",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "TEK ADIM YETER,",
+            "color": "#ffffff",
+            "size": 86
+          },
+          {
+            "text": "GERİSİ GELİR.",
+            "color": "#FFE600",
+            "size": 86
+          }
+        ]
+      },
+      {
+        "bg": "#111111",
+        "font": "Oswald",
+        "textAnim": "fade",
+        "deco": "dots",
+        "decoColor": "#FFE600",
+        "decoOpacity": 12,
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "AI PLANI SENİN",
+            "color": "#ffffff",
+            "size": 82
+          },
+          {
+            "text": "İÇİN ÇIKARIR.",
+            "color": "#FFE600",
+            "size": 82
+          }
+        ]
+      },
+      {
+        "bg": "#FFE600",
+        "font": "Anton",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SEN DE",
+            "color": "#111111",
+            "size": 110
+          },
+          {
+            "text": "BAŞLA.",
+            "color": "#111111",
+            "size": 150
+          }
+        ]
+      },
+      {
+        "bg": "#111111",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 2.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ERTELEME.",
+            "color": "#FFE600",
+            "size": 150,
+            "underline": true
+          }
+        ]
+      }
+    ],
+    "category": "quiz"
+  },
+  {
+    "label": "Quiz & Test",
+    "desc": "Soru → Bekle → Çözüm",
+    "c1": "#2563EB",
+    "c2": "#FBBF24",
+    "slides": [
+      {
+        "bg": "#2563EB",
+        "font": "Poppins",
+        "textAnim": "slide_up",
+        "deco": "circles",
+        "decoColor": "#FBBF24",
+        "decoOpacity": 15,
+        "duration": 1.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "KÜÇÜK BİR",
+            "color": "#ffffff",
+            "size": 90
+          },
+          {
+            "text": "TEST",
+            "color": "#FBBF24",
+            "size": 160
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 2.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "GÜNDE KAÇ",
+            "color": "#ffffff",
+            "size": 100
+          },
+          {
+            "text": "FİKRİ",
+            "color": "#FBBF24",
+            "size": 140
+          },
+          {
+            "text": "UNUTUYORSUN?",
+            "color": "#ffffff",
+            "size": 90
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 2.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "A) 1 VEYA 2",
+            "color": "#ffffff",
+            "size": 80,
+            "box": "#2563EB"
+          },
+          {
+            "text": "B) 3-5 ARASI",
+            "color": "#ffffff",
+            "size": 80,
+            "box": "#2563EB"
+          },
+          {
+            "text": "C) SAYAMADIM BİLE",
+            "color": "#ffffff",
+            "size": 80,
+            "box": "#2563EB"
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Poppins",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DÜŞÜN...",
+            "color": "#FBBF24",
+            "size": 110
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SÜRE DOLDU.",
+            "color": "#ffffff",
+            "size": 110
+          }
+        ]
+      },
+      {
+        "bg": "#FBBF24",
+        "font": "Poppins",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DOĞRU CEVAP:",
+            "color": "#1E3A8A",
+            "size": 100
+          },
+          {
+            "text": "HİÇBİRİNİ.",
+            "color": "#2563EB",
+            "size": 150
+          }
+        ]
+      },
+      {
+        "bg": "#2563EB",
+        "font": "Poppins",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ÇÜNKÜ ARTIK",
+            "color": "#ffffff",
+            "size": 80
+          },
+          {
+            "text": "BİZ BURADAYIZ.",
+            "color": "#FBBF24",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#1E3A8A",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "TEK DOKUNUŞLA",
+            "color": "#ffffff",
+            "size": 80
+          },
+          {
+            "text": "KAYDET VE GEÇ.",
+            "color": "#FBBF24",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#2563EB",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SENİN YERİNE",
+            "color": "#ffffff",
+            "size": 90
+          },
+          {
+            "text": "BİZ HATIRLARIZ.",
+            "color": "#FBBF24",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#FBBF24",
+        "font": "Poppins",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 2.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "TESTİ GEÇ.",
+            "color": "#1E3A8A",
+            "size": 100
+          },
+          {
+            "text": "HEMEN İNDİR.",
+            "color": "#1E3A8A",
+            "size": 130
+          }
+        ]
+      }
+    ],
+    "category": "quiz"
+  },
+  {
+    "label": "Soru & Çözüm",
+    "desc": "Soru → Bekle → Çözüm",
+    "c1": "#4C1D95",
+    "c2": "#A3E635",
+    "slides": [
+      {
+        "bg": "#4C1D95",
+        "font": "Anton",
+        "textAnim": "skew_pop",
+        "deco": "diagonal",
+        "decoColor": "#A3E635",
+        "decoOpacity": 10,
+        "duration": 2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SANA BİR",
+            "color": "#ffffff",
+            "size": 120
+          },
+          {
+            "text": "SORUM VAR.",
+            "color": "#A3E635",
+            "size": 160
+          }
+        ]
+      },
+      {
+        "bg": "#2E1065",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 2.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DÜN AKŞAM",
+            "color": "#ffffff",
+            "size": 120
+          },
+          {
+            "text": "AKLINA GELEN",
+            "color": "#A3E635",
+            "size": 130
+          },
+          {
+            "text": "O MÜTHİŞ FİKİR...",
+            "color": "#ffffff",
+            "size": 100
+          }
+        ]
+      },
+      {
+        "bg": "#2E1065",
+        "font": "Anton",
+        "textAnim": "fade",
+        "deco": "dots",
+        "decoColor": "#A3E635",
+        "decoOpacity": 15,
+        "duration": 2.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ŞU AN",
+            "color": "#A3E635",
+            "size": 120
+          },
+          {
+            "text": "NEREDE?",
+            "color": "#ffffff",
+            "size": 170
+          }
+        ]
+      },
+      {
+        "bg": "#2E1065",
+        "font": "Anton",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "...",
+            "color": "#A3E635",
+            "size": 180
+          }
+        ]
+      },
+      {
+        "bg": "#4C1D95",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "UÇTU GİTTİ,",
+            "color": "#ffffff",
+            "size": 120
+          },
+          {
+            "text": "DEĞİL Mİ?",
+            "color": "#A3E635",
+            "size": 140
+          }
+        ]
+      },
+      {
+        "bg": "#2E1065",
+        "font": "Anton",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "İŞTE BU YÜZDEN",
+            "color": "#ffffff",
+            "size": 90
+          },
+          {
+            "text": "BURADAYIZ.",
+            "color": "#A3E635",
+            "size": 130
+          }
+        ]
+      },
+      {
+        "bg": "#4C1D95",
+        "font": "Anton",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ZAMAN KAYBETMEDEN",
+            "color": "#ffffff",
+            "size": 100
+          },
+          {
+            "text": "KAYDET.",
+            "color": "#A3E635",
+            "size": 150
+          }
+        ]
+      },
+      {
+        "bg": "#2E1065",
+        "font": "Anton",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ANINDA EŞİTLE.",
+            "color": "#A3E635",
+            "size": 120
+          },
+          {
+            "text": "ASLA UNUTMA.",
+            "color": "#ffffff",
+            "size": 110
+          }
+        ]
+      },
+      {
+        "bg": "#4C1D95",
+        "font": "Anton",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SORUN ÇÖZÜLDÜ.",
+            "color": "#A3E635",
+            "size": 110
+          }
+        ]
+      },
+      {
+        "bg": "#A3E635",
+        "font": "Anton",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 2.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ÇÖZÜME",
+            "color": "#2E1065",
+            "size": 120
+          },
+          {
+            "text": "ORTAK OL.",
+            "color": "#2E1065",
+            "size": 150
+          }
+        ]
+      }
+    ],
+    "category": "quiz"
+  },
+  {
+    "label": "Hızlı Quiz — Teal & Mercan",
+    "desc": "Soru → Bekle → Çözüm",
+    "category": "quiz",
+    "c1": "#0F766E",
+    "c2": "#FB7185",
+    "slides": [
+      {
+        "bg": "#0F766E",
+        "font": "Poppins",
+        "textAnim": "slide_up",
+        "deco": "circles",
+        "decoColor": "#FB7185",
+        "decoOpacity": 15,
+        "duration": 1.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HIZLI BİR",
+            "color": "#ffffff",
+            "size": 90
+          },
+          {
+            "text": "QUIZ ZAMANI",
+            "color": "#FB7185",
+            "size": 130
+          }
+        ]
+      },
+      {
+        "bg": "#134E4A",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 2.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "YENİ BİR BİLGİYİ",
+            "color": "#ffffff",
+            "size": 90
+          },
+          {
+            "text": "BEYNİN KAÇ",
+            "color": "#FB7185",
+            "size": 110
+          },
+          {
+            "text": "SANİYEDE UNUTUR?",
+            "color": "#ffffff",
+            "size": 82
+          }
+        ]
+      },
+      {
+        "bg": "#134E4A",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 2.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "A) 5 SANİYE",
+            "color": "#ffffff",
+            "size": 80,
+            "box": "#0F766E"
+          },
+          {
+            "text": "B) 20 DAKİKA",
+            "color": "#ffffff",
+            "size": 80,
+            "box": "#0F766E"
+          },
+          {
+            "text": "C) HİÇ UNUTMAZ",
+            "color": "#ffffff",
+            "size": 80,
+            "box": "#0F766E"
+          }
+        ]
+      },
+      {
+        "bg": "#134E4A",
+        "font": "Poppins",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DÜŞÜN...",
+            "color": "#FB7185",
+            "size": 110
+          }
+        ]
+      },
+      {
+        "bg": "#134E4A",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.2,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SÜRE DOLDU.",
+            "color": "#ffffff",
+            "size": 110
+          }
+        ]
+      },
+      {
+        "bg": "#FB7185",
+        "font": "Poppins",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "DOĞRU CEVAP:",
+            "color": "#134E4A",
+            "size": 100
+          },
+          {
+            "text": "20 DAKİKA.",
+            "color": "#0F766E",
+            "size": 140
+          }
+        ]
+      },
+      {
+        "bg": "#0F766E",
+        "font": "Poppins",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ÇÜNKÜ BEYNİN",
+            "color": "#ffffff",
+            "size": 90
+          },
+          {
+            "text": "SEÇİCİDİR.",
+            "color": "#FB7185",
+            "size": 120
+          }
+        ]
+      },
+      {
+        "bg": "#134E4A",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "AMA SEN",
+            "color": "#ffffff",
+            "size": 90
+          },
+          {
+            "text": "SEÇEBİLİRSİN.",
+            "color": "#FB7185",
+            "size": 110
+          }
+        ]
+      },
+      {
+        "bg": "#0F766E",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.4,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ÖNEMLİ OLANI",
+            "color": "#ffffff",
+            "size": 90
+          },
+          {
+            "text": "TEK DOKUNUŞLA KAYDET.",
+            "color": "#FB7185",
+            "size": 78
+          }
+        ]
+      },
+      {
+        "bg": "#FB7185",
+        "font": "Poppins",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 2.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SINAVI GEÇ.",
+            "color": "#134E4A",
+            "size": 100
+          },
+          {
+            "text": "HEMEN İNDİR.",
+            "color": "#134E4A",
+            "size": 130,
+            "underline": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Yeşil & Altın — Mushaf",
+    "desc": "Sorun → Çözüm (Mushaf esintili)",
+    "c1": "#0B3D2E",
+    "c2": "#D4AF37",
+    "category": "kuran",
+    "slides": [
+      {
+        "bg": "#0B3D2E",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "mihrab_frame",
+        "decoColor": "#D4AF37",
+        "decoOpacity": 14,
+        "duration": 2.2,
+        "align": "middle",
+        "lineHeight": 1,
+        "textPadding": 100,
+        "lines": [
+          {
+            "text": "TECVİD",
+            "color": "#ffffff",
+            "size": 150
+          },
+          {
+            "text": "HATASI",
+            "color": "#ffffff",
+            "size": 120
+          },
+          {
+            "text": "?",
+            "color": "#D4AF37",
+            "size": 330
+          }
+        ],
+        "mushafSurah": 1,
+        "mushafAyah": 1,
+        "mushafBgPreset": "cream"
+      },
+      {
+        "bg": "#0B3D2E",
+        "font": "Poppins",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 0.9,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HERKESİN",
+            "color": "#ffffff",
+            "size": 180
+          }
+        ]
+      },
+      {
+        "bg": "#0B3D2E",
+        "font": "Poppins",
+        "textAnim": "none",
+        "deco": "none",
+        "duration": 1,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BAŞINA GELİR.",
+            "color": "#D4AF37",
+            "size": 150
+          }
+        ]
+      },
+      {
+        "bg": "#103F2E",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.5,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "BİR MEDDİ,",
+            "color": "#ffffff",
+            "size": 90
+          },
+          {
+            "text": "BİR İDGAM,",
+            "color": "#D4AF37",
+            "size": 90
+          },
+          {
+            "text": "GÖZDEN KAÇAR.",
+            "color": "#ffffff",
+            "size": 78
+          }
+        ]
+      },
+      {
+        "bg": "#103F2E",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HARFİ DOĞRU",
+            "color": "#ffffff",
+            "size": 82
+          },
+          {
+            "text": "MAHREÇTEN ÇIKARAMAZSAN,",
+            "color": "#D4AF37",
+            "size": 82
+          }
+        ]
+      },
+      {
+        "bg": "#0B3D2E",
+        "font": "Poppins",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "ÇÖZÜM:",
+            "color": "#ffffff",
+            "size": 170
+          }
+        ]
+      },
+      {
+        "bg": "#0B3D2E",
+        "font": "Poppins",
+        "textAnim": "slide_up",
+        "deco": "mihrab_frame",
+        "decoColor": "#D4AF37",
+        "decoOpacity": 10,
+        "duration": 1.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "HARF HARF,",
+            "color": "#ffffff",
+            "size": 96
+          },
+          {
+            "text": "TASHİH-İ HURUF.",
+            "color": "#D4AF37",
+            "size": 96
+          }
+        ]
+      },
+      {
+        "bg": "#0B3D2E",
+        "font": "Poppins",
+        "textAnim": "slide_left",
+        "deco": "none",
+        "duration": 1.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "REİSÜLQURRA",
+            "color": "#ffffff",
+            "size": 88
+          },
+          {
+            "text": "SENİ DİNLER.",
+            "color": "#D4AF37",
+            "size": 88
+          }
+        ]
+      },
+      {
+        "bg": "#0B3D2E",
+        "font": "Poppins",
+        "textAnim": "fade",
+        "deco": "dots",
+        "decoColor": "#D4AF37",
+        "decoOpacity": 12,
+        "duration": 1.8,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "10.000+ HAFIZ ADAYI",
+            "color": "#D4AF37",
+            "size": 86
+          },
+          {
+            "text": "ARTIK EMİN OKUYOR.",
+            "color": "#ffffff",
+            "size": 86
+          }
+        ]
+      },
+      {
+        "bg": "#FFF8E7",
+        "font": "Poppins",
+        "textAnim": "scale_up",
+        "deco": "none",
+        "duration": 1.3,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "SEN DE",
+            "color": "#0B3D2E",
+            "size": 120
+          },
+          {
+            "text": "KATIL.",
+            "color": "#B8860B",
+            "size": 150
+          }
+        ]
+      },
+      {
+        "bg": "#D4AF37",
+        "font": "Poppins",
+        "textAnim": "slide_up",
+        "deco": "none",
+        "duration": 2.6,
+        "align": "middle",
+        "lineHeight": 1.15,
+        "textPadding": 110,
+        "lines": [
+          {
+            "text": "İNDİR.",
+            "color": "#0B3D2E",
+            "size": 170,
+            "underline": true
+          }
+        ],
+        "mushafSurah": 1,
+        "mushafAyah": 1,
+        "mushafBgPreset": "sepia"
+      }
+    ]
+  },
+  {
+    "label": "Kur'an — Mushaf Okuması",
+    "desc": "Gerçek Mushaf sayfası, ayet ayet vurgulanan okuma videosu",
+    "c1": "#0B3D2E",
+    "c2": "#D4AF37",
+    "category": "kuran",
+    "dark": true,
+    "special": "mushaf",
+    "slides": []
+  },
+  {
+    "label": "Kur'an — Bil Bakalım Quiz",
+    "desc": "Ayetteki boşluğu/sırayı bul, 10 sn düşün, doğru cevabı gör",
+    "c1": "#3B1F5C",
+    "c2": "#F2B705",
+    "category": "kuran",
+    "dark": true,
+    "special": "quiz",
+    "slides": []
+  }
+]
